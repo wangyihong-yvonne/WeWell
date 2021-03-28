@@ -125,18 +125,6 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         return root;
     }
 
-    /**
-     * Saves the state of the map when the activity is paused.
-     */
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        if (map != null) {
-            outState.putParcelable(KEY_CAMERA_POSITION, map.getCameraPosition());
-            outState.putParcelable(KEY_LOCATION, lastKnownLocation);
-        }
-        super.onSaveInstanceState(outState);
-    }
-
     @SuppressLint("MissingPermission")
     public void startTracking() {
         LocationRequest locationRequest = new LocationRequest();
@@ -157,6 +145,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     }
 
     public void onLocationUpdate(Location location) {
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 17));
         if (location != null) {
             showRoute(location);
         }
@@ -166,6 +155,9 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         Location previousLocation = null;
         if (locationHistory.isEmpty()) {
             previousLocation = location;
+            LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+            map.addMarker(new MarkerOptions().position(currentLocation).title("My start location"));
+            map.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
         } else {
             previousLocation = locationHistory.get(locationHistory.size() - 1);
         }
@@ -228,19 +220,13 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         // Turn on the My Location layer and the related control on the map.
         updateLocationUI();
 
-        // Get the current location of the device and set the position of the map.
-        // todo currently in emulator not the same with track starting point
         getDeviceLocation();
     }
 
-    /**
-     * Gets the current location of the device, and positions the map's camera.
-     */
+    // Gets the current location of the device, and positions the map's camera.
     private void getDeviceLocation() {
-        /*
-         * Get the best and most recent location of the device, which may be null in rare
-         * cases when a location is not available.
-         */
+        // Get the best and most recent location of the device, which may be null in rare
+        // cases when a location is not available.
         try {
             if (locationPermissionGranted) {
                 Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
@@ -256,8 +242,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                                                 lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
 
                                 LatLng currentLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
-                                map.addMarker(new MarkerOptions().position(currentLocation).title("My current location"));
-//                                map.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+                                map.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
                             }
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
@@ -297,21 +282,23 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     /**
      * Handles the result of the request for location permissions.
      */
+    @SuppressLint("MissingPermission")
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        locationPermissionGranted = false;
-        switch (requestCode) {
+        public void onRequestPermissionsResult(int requestCode,
+        @NonNull String[] permissions,
+        @NonNull int[] grantResults) {
+            locationPermissionGranted = false;
+            switch (requestCode) {
             case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     locationPermissionGranted = true;
+                    // todo need fix, the map won't refresh
+                    onMapReady(map);
                 }
             }
         }
-        updateLocationUI();
     }
 
     /**
@@ -439,6 +426,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
             if (locationPermissionGranted) {
                 map.setMyLocationEnabled(true);
                 map.getUiSettings().setMyLocationButtonEnabled(true);
+                map.getUiSettings().setCompassEnabled(true);
             } else {
                 map.setMyLocationEnabled(false);
                 map.getUiSettings().setMyLocationButtonEnabled(false);
