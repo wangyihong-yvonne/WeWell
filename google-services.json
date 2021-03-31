@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "706968685603",
+    "project_id": "wewell-5ec57",
+    "storage_bucket": "wewell-5ec57.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706968685603:android:e9bb047a6afada8e4d7596",
+        "android_client_info": {
+          "package_name": "edu.neu.madcourse.wewell"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706968685603-i0a63sct8c10tbsuan38rs9shpanvktk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbKBTcyzmDj7J24DhairXDcGIeSFpHgbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706968685603-i0a63sct8c10tbsuan38rs9shpanvktk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
