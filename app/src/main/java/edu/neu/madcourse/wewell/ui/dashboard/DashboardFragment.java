@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -115,7 +116,8 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
 
         // start tracking when "go" button is clicked
-        FloatingActionButton runButton = (FloatingActionButton) root.findViewById(R.id.floatingActionButton);
+//        FloatingActionButton runButton = (FloatingActionButton) root.findViewById(R.id.floatingActionButton);
+        Button runButton = (Button) root.findViewById(R.id.floatingActionButton);
         runButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
