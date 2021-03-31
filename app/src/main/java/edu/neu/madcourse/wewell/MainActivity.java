@@ -18,7 +18,7 @@ import edu.neu.madcourse.wewell.ui.home.HomeFragment;
 import edu.neu.madcourse.wewell.ui.notifications.NotificationsFragment;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int ACCESS_FINE_LOCATION_REQUEST_CODE = 1;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
     final Fragment fragment1 = new HomeFragment();
     final Fragment fragment2 = new DashboardFragment();
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    ACCESS_FINE_LOCATION_REQUEST_CODE);
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
 
     }
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                                            @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         switch (requestCode) {
-            case ACCESS_FINE_LOCATION_REQUEST_CODE: {
+            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

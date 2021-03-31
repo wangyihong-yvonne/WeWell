@@ -127,8 +127,9 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
     @SuppressLint("MissingPermission")
     public void startTracking() {
-        LocationRequest locationRequest = new LocationRequest();
-        locationRequest = new LocationRequest();
+        getLocationPermission();
+
+        LocationRequest locationRequest = LocationRequest.create();
         // location update interval: 0.3 second
         locationRequest.setInterval(300);
         // fast location update interval: 0.01 second
@@ -279,27 +280,21 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-    /**
-     * Handles the result of the request for location permissions.
-     */
-    @SuppressLint("MissingPermission")
     @Override
-        public void onRequestPermissionsResult(int requestCode,
-        @NonNull String[] permissions,
-        @NonNull int[] grantResults) {
-            locationPermissionGranted = false;
-            switch (requestCode) {
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
             case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    locationPermissionGranted = true;
-                    // todo need fix, the map won't refresh
-                    onMapReady(map);
+                    getActivity().recreate();
                 }
             }
         }
     }
+
 
     /**
      * Prompts the user to select the current place from a list of likely places, and shows the
