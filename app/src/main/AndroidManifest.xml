@@ -18,12 +18,30 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"/>
+        <activity
+            android:name=".PasswordActivity"
+            android:label="PasswordActivity"/>
 
         <activity
             android:name=".SignInActivity"
             android:label="@string/title_activity_sign_in"/>
+        <activity
+            android:name=".LoginActivity"
+            android:label="LoginActivity"/>
+        <activity
+            android:name=".SignUpActivity"
+            android:label="AfterLoginActivity"/>
 
+        <activity android:name=".WelcomeActivity"
+            android:label="@string/title_activity_welcome">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
              Note that the API key is linked to the encryption key used to sign the APK.
