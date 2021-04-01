@@ -17,9 +17,12 @@
         android:theme="@style/Theme.WeWell">
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main">
+            android:label="@string/title_activity_main"/>
 
-        </activity>
+        <activity
+            android:name=".SignInActivity"
+            android:label="@string/title_activity_sign_in"/>
+
         <activity android:name=".WelcomeActivity"
             android:label="@string/title_activity_welcome">
             <intent-filter>
