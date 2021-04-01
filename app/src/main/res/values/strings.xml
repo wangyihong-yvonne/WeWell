@@ -11,4 +11,5 @@
     <string name="current_user_email">current_user_email</string>
     <string name="current_user_name">current_user_name</string>
     <string name="fui_progress_dialog_signing_up">Creating your shiny new account...</string>
+    <string name="sign_up">Sign up</string>
 </resources>
