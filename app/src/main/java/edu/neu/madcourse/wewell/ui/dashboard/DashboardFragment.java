@@ -1,7 +1,9 @@
 package edu.neu.madcourse.wewell.ui.dashboard;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -40,7 +42,6 @@ import com.google.android.libraries.places.api.model.PlaceLikelihood;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -124,6 +125,16 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 startTracking();
             }
         });
+
+        // get current user
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String currentUserEmail = sharedPreferences.getString(getString(R.string.current_user_email), null);
+        String currentUsername = sharedPreferences.getString(getString(R.string.current_user_name), null);
+
+        System.out.println(currentUserEmail);
+        System.out.println(currentUsername);
+
         return root;
     }
 

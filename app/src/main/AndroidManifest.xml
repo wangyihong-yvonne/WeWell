@@ -17,11 +17,13 @@
         android:theme="@style/Theme.WeWell">
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main">
+            android:label="@string/title_activity_main"/>
 
-        </activity><![CDATA[
-        />
-        ]]><!--
+        <activity
+            android:name=".SignInActivity"
+            android:label="@string/title_activity_sign_in"/>
+
+
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
              Note that the API key is linked to the encryption key used to sign the APK.
