@@ -15,7 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import edu.neu.madcourse.wewell.R;
-import edu.neu.madcourse.wewell.SignUpActivity;
+import edu.neu.madcourse.wewell.SignInActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
                 .signOut(getActivity())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     public void onComplete(@NonNull Task<Void> task) {
-                        Intent intent = new Intent(getActivity(), SignUpActivity.class);
+                        Intent intent = new Intent(getActivity(), SignInActivity.class);
                         startActivity(intent);
                         getActivity().finish();
                     }
