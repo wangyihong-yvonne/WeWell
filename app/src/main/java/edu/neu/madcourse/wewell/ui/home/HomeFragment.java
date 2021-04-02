@@ -10,6 +10,10 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
 import edu.neu.madcourse.wewell.R;
 import edu.neu.madcourse.wewell.SignUpActivity;
 
@@ -28,28 +32,28 @@ public class HomeFragment extends Fragment {
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //signOut();
-                startActivity(new Intent(getActivity(), SignUpActivity.class));
-                getActivity().finish();
+                signOut();
+//                startActivity(new Intent(getActivity(), SignUpActivity.class));
+//                getActivity().finish();
             }
         });
 
         return root;
     }
 
-//    public void signOut() {
-//        // [START auth_fui_signout]
-//        AuthUI.getInstance()
-//                .signOut(getActivity())
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        Intent intent = new Intent(getActivity(), SignUpActivity.class);
-//                        startActivity(intent);
-//                        getActivity().finish();
-//                    }
-//                });
-//        // [END auth_fui_signout]
-//    }
+    public void signOut() {
+        // [START auth_fui_signout]
+        AuthUI.getInstance()
+                .signOut(getActivity())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Intent intent = new Intent(getActivity(), SignUpActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                });
+        // [END auth_fui_signout]
+    }
 
 
 }
