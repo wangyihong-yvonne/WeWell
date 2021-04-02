@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+
+    <!-- Used in tests -->
+
+    <com.firebase.ui.auth.util.ui.SupportVectorDrawablesButton
+        android:id="@+id/sign_in_with_email"
+        style="@style/FirebaseUI.Button.AccountChooser.EmailButton"
+        android:layout_width="224dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="412dp"
+        android:text="@string/fui_sign_in_with_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnusedIds" />
+
+    <com.firebase.ui.auth.util.ui.SupportVectorDrawablesButton
+        android:id="@+id/sign_in_with_google"
+        style="@style/FirebaseUI.Button.AccountChooser.GoogleButton"
+        android:layout_width="224dp"
+        android:layout_height="47dp"
+        android:text="@string/fui_sign_in_with_google"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_with_email"
+        app:layout_constraintVertical_bias="0.186" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
