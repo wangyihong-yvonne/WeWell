@@ -7,14 +7,15 @@
     android:orientation="vertical"
     tools:context=".SignUpActivity">
 
-  <EditText
-      android:id="@+id/editTextTextPersonName"
+  <TextView
+      android:id="@+id/textView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:ems="10"
-      android:inputType="textPersonName"
       android:text="First time here? Signup below"
-      android:textAlignment="center" />
+      android:textAlignment="center"
+      android:textColor="@color/purple_700"
+      android:textSize="18sp"
+      android:textStyle="bold|italic" />
 
   <EditText
       android:id="@+id/etEmail"
@@ -38,14 +39,16 @@
       android:layout_height="wrap_content"
       android:text="Signup" />
 
-  <EditText
-      android:id="@+id/editTextTextPersonName2"
+  <TextView
+      android:id="@+id/textView3"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:ems="10"
-      android:inputType="textPersonName"
+      android:lineSpacingExtra="18sp"
       android:text="Not first time? Login below"
-      android:textAlignment="center" />
+      android:textAlignment="center"
+      android:textColor="@color/purple_700"
+      android:textSize="18sp"
+      android:textStyle="bold|italic" />
 
   <Button
       android:id="@+id/btnLogin"
