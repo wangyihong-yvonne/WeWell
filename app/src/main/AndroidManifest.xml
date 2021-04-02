@@ -30,7 +30,7 @@
             android:label="LoginActivity"/>
         <activity
             android:name=".SignUpActivity"
-            android:label="AfterLoginActivity"/>
+            android:label="SignUpActivity"/>
 
         <activity android:name=".WelcomeActivity"
             android:label="@string/title_activity_welcome">
