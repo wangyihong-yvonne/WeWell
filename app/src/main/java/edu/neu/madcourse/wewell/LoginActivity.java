@@ -1,6 +1,8 @@
 package edu.neu.madcourse.wewell;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     EditText email;
@@ -49,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         if (firebaseAuth.getCurrentUser().isEmailVerified()) {
+                                            saveUserInfo();
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                             startActivity(intent);
                                         } else {
@@ -66,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,5 +85,20 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void saveUserInfo() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        // write to shared preferences
+        SharedPreferences sharedPreferences = getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(getString(R.string.current_user_email), user.getEmail());
+        editor.putString(getString(R.string.current_user_name), user.getDisplayName());
+        // todo apply() changes the in-memory SharedPreferences object immediately
+        //  but writes the updates to disk asynchronously. Alternatively,
+        //  you can use commit() to write the data to disk synchronously.
+        //  But because commit() is synchronous, you should avoid calling it
+        //  from your main thread because it could pause your UI rendering.
+        editor.commit();
     }
 }
