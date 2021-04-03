@@ -78,6 +78,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
     private Location lastKnownLocation;
+    private Location previousLocation;
 
     private Button btPause = null;
     private Button btRun = null;
@@ -96,6 +97,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     private boolean isDrawRoute = false;
     private static int delay = 1000; //1s
     private static int period = 1000; //1s
+    private static int distance = 0;
     private static final int UPDATE_TEXTVIEW = 0;
 
 
@@ -156,17 +158,12 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         btPause.setOnClickListener(listener);
         btStop.setOnClickListener(listener);
 
+        //initial buttons state
         btRun.setEnabled(true);
         btPause.setEnabled(false);
         btStop.setEnabled(false);
-        startTracking();
 
-//        btRun.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startTracking();
-//            }
-//        });
+        startTracking();
 
         mHandler = new Handler() {
             public void handleMessage(Message msg) {
@@ -205,6 +202,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 btRun.setEnabled(false);
                 btPause.setEnabled(true);
                 btStop.setEnabled(true);
+                isDrawRoute= true;
             }
 
             if (v == btPause) {
@@ -220,6 +218,22 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                     btPause.setText("Pause");
                     isDrawRoute = true;
                 }
+            }
+
+            if (v == btStop) {
+                if (isPause){
+                    isPause = !isPause;
+                }
+                btRun.setEnabled(true);
+                btPause.setEnabled(false);
+                btStop.setEnabled(false);
+                previousLocation = null;
+                lastKnownLocation = null;
+                stopTimer();
+                isDrawRoute = false;
+                distance = 0;
+                routeLines.clear();
+
             }
         }
     };
@@ -253,6 +267,20 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
     private void pauseTimer(){
         isPause = !isPause;
+    }
+
+    private void stopTimer() {
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
+
+        }
+        if (mTimerTask != null) {
+            mTimerTask.cancel();
+            mTimerTask = null;
+
+        }
+        timeCount = 0;
     }
 
     private String getTimerText() {
@@ -298,20 +326,23 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
     public void onLocationUpdate(Location location) {
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 17));
+        //draw the route only when the user is running
         if (location != null && isDrawRoute) {
             showRoute(location);
         }
     }
 
     private void showRoute(Location location) {
-        Location previousLocation = null;
         if (locationHistory.isEmpty()) {
             previousLocation = location;
             LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
             map.addMarker(new MarkerOptions().position(currentLocation).title("My start location"));
             map.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
         } else {
+            lastKnownLocation = location;
             previousLocation = locationHistory.get(locationHistory.size() - 1);
+            distance += lastKnownLocation.distanceTo(previousLocation);
+//            System.out.println("total distance: " + distance);
         }
         locationHistory.add(location);
 
@@ -321,7 +352,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         if (distance > 0.03) {
             lineOptions.add(new LatLng(previousLocation.getLatitude(), previousLocation.getLongitude()))
                     .add(new LatLng(location.getLatitude(), location.getLongitude()))
-                    .width(30);
+                    .width(10);
         }
 
         Polyline currentLine = map.addPolyline(lineOptions);
