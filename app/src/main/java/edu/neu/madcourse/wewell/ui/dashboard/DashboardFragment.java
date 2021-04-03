@@ -7,12 +7,15 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -45,7 +48,10 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import edu.neu.madcourse.wewell.R;
 
@@ -68,9 +74,30 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean locationPermissionGranted;
 
+
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
     private Location lastKnownLocation;
+
+    private Button btPause = null;
+    private Button btRun = null;
+    private Button btStop = null;
+    private TextView textTime = null;
+    private TextView textDistance = null;
+    private TextView textPace = null;
+    private TextView textCalories = null;
+    private Timer mTimer = null;
+    private TimerTask mTimerTask = null;
+    private Handler mHandler = null;
+
+    private static int timeCount = 0; //in seconds
+    private boolean isPause = false;
+    private boolean isStop = true;
+    private boolean isDrawRoute = false;
+    private static int delay = 1000; //1s
+    private static int period = 1000; //1s
+    private static final int UPDATE_TEXTVIEW = 0;
+
 
     // Keys for storing activity state.
     private static final String KEY_CAMERA_POSITION = "camera_position";
@@ -116,15 +143,42 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        // start tracking when "go" button is clicked
-//        FloatingActionButton runButton = (FloatingActionButton) root.findViewById(R.id.floatingActionButton);
-        Button runButton = (Button) root.findViewById(R.id.floatingActionButton);
-        runButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startTracking();
+
+        btRun = (Button) root.findViewById(R.id.button_run);
+        btPause = (Button) root.findViewById(R.id.button_pause);
+        btStop = (Button) root.findViewById(R.id.button_stop);
+        textTime = (TextView) root.findViewById(R.id.data_time);
+        textDistance = (TextView) root.findViewById(R.id.data_distance);
+        textPace = (TextView) root.findViewById(R.id.data_pace);
+        textCalories = (TextView) root.findViewById(R.id.data_calories);
+
+        btRun.setOnClickListener(listener);
+        btPause.setOnClickListener(listener);
+        btStop.setOnClickListener(listener);
+
+        btRun.setEnabled(true);
+        btPause.setEnabled(false);
+        btStop.setEnabled(false);
+        startTracking();
+
+//        btRun.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startTracking();
+//            }
+//        });
+
+        mHandler = new Handler() {
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case UPDATE_TEXTVIEW:
+                        updateTextView();
+                        break;
+                    default:
+                        break;
+                }
             }
-        });
+        };
 
         // get current user
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(
@@ -136,6 +190,90 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         System.out.println(currentUsername);
 
         return root;
+    }
+
+    private void updateTextView() {
+        textTime.setText(getTimerText());
+
+    }
+
+    /*chronometer*/
+    private View.OnClickListener listener = new View.OnClickListener() {
+        public void onClick(View v) {
+            if (v == btRun) {
+                startTimer();
+                btRun.setEnabled(false);
+                btPause.setEnabled(true);
+                btStop.setEnabled(true);
+            }
+
+            if (v == btPause) {
+                pauseTimer();
+                btRun.setEnabled(false);
+                btPause.setEnabled(true);
+                btStop.setEnabled(true);
+                if (isPause) {//pause
+                    btPause.setText("Resume");
+                    //stop drawing
+                    isDrawRoute = false;
+                }else{ //resume
+                    btPause.setText("Pause");
+                    isDrawRoute = true;
+                }
+            }
+        }
+    };
+
+    private void startTimer() {
+        if (mTimer == null) {
+            mTimer = new Timer();
+        }
+
+        if (mTimerTask == null) {
+            mTimerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    sendMessage(UPDATE_TEXTVIEW);
+                    do {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                        }
+                    } while (isPause);
+                    timeCount++; /*update time*/
+                }
+            };
+        }
+
+        if (mTimer != null) {
+            mTimer.schedule(mTimerTask, delay, period);
+        }
+
+    }
+
+    private void pauseTimer(){
+        isPause = !isPause;
+    }
+
+    private String getTimerText() {
+        int rounded = Math.round(timeCount);
+
+        int seconds = ((rounded % 86400) % 3600) % 60;
+        int minutes = ((rounded % 86400) % 3600) / 60;
+        int hours = ((rounded % 86400) / 3600);
+
+        return formatTime(seconds, minutes, hours);
+    }
+
+    private String formatTime(int seconds, int minutes, int hours) {
+        return String.format("%02d", hours) + " : " + String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
+    }
+
+    public void sendMessage(int id) {
+        if (mHandler != null) {
+            Message message = Message.obtain(mHandler, id);
+            mHandler.sendMessage(message);
+        }
     }
 
     @SuppressLint("MissingPermission")
@@ -160,7 +298,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
     public void onLocationUpdate(Location location) {
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 17));
-        if (location != null) {
+        if (location != null && isDrawRoute) {
             showRoute(location);
         }
     }
@@ -180,7 +318,6 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         PolylineOptions lineOptions = new PolylineOptions();
         // todo location update interval 0.03 same as drawing interval
         float distance = location.distanceTo(previousLocation);
-        System.out.println(distance);
         if (distance > 0.03) {
             lineOptions.add(new LatLng(previousLocation.getLatitude(), previousLocation.getLongitude()))
                     .add(new LatLng(location.getLatitude(), location.getLongitude()))
