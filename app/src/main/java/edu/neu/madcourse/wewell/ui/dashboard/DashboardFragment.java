@@ -49,6 +49,7 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -97,9 +98,9 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     private boolean isDrawRoute = false;
     private static int delay = 1000; //1s
     private static int period = 1000; //1s
-    private static int distance = 0;
+    private static double distance = 0;
     private static final int UPDATE_TEXTVIEW = 0;
-
+    private static long startTime = 0;
 
     // Keys for storing activity state.
     private static final String KEY_CAMERA_POSITION = "camera_position";
@@ -189,11 +190,6 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         return root;
     }
 
-    private void updateTextView() {
-        textTime.setText(getTimerText());
-
-    }
-
     /*chronometer*/
     private View.OnClickListener listener = new View.OnClickListener() {
         public void onClick(View v) {
@@ -202,7 +198,11 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 btRun.setEnabled(false);
                 btPause.setEnabled(true);
                 btStop.setEnabled(true);
-                isDrawRoute= true;
+                isDrawRoute = true;
+                textDistance.setText("0.00");
+                textPace.setText("00'00''");
+                textCalories.setText("0");
+                startTime = System.currentTimeMillis();
             }
 
             if (v == btPause) {
@@ -214,14 +214,14 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                     btPause.setText("Resume");
                     //stop drawing
                     isDrawRoute = false;
-                }else{ //resume
+                } else { //resume
                     btPause.setText("Pause");
                     isDrawRoute = true;
                 }
             }
 
             if (v == btStop) {
-                if (isPause){
+                if (isPause) {
                     isPause = !isPause;
                 }
                 btRun.setEnabled(true);
@@ -233,7 +233,6 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 isDrawRoute = false;
                 distance = 0;
                 routeLines.clear();
-
             }
         }
     };
@@ -265,7 +264,14 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
-    private void pauseTimer(){
+    public void sendMessage(int id) {
+        if (mHandler != null) {
+            Message message = Message.obtain(mHandler, id);
+            mHandler.sendMessage(message);
+        }
+    }
+
+    private void pauseTimer() {
         isPause = !isPause;
     }
 
@@ -297,11 +303,28 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         return String.format("%02d", hours) + " : " + String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
     }
 
-    public void sendMessage(int id) {
-        if (mHandler != null) {
-            Message message = Message.obtain(mHandler, id);
-            mHandler.sendMessage(message);
-        }
+    private String getPace() {
+        long timeElapsed = startTime - System.currentTimeMillis();
+        long pace = (long) (timeElapsed / (distance / 1000));
+        long minutes = (pace / 1000) / 60;
+        int seconds = (int) ((pace / 1000) % 60);
+        System.out.println(minutes + "'" + seconds + "''");
+        return minutes + "'" + seconds + "''";
+    }
+
+    /*calories*/
+    public String getCalories() {
+        int c = (int)((distance + timeCount)*0.25);
+        return String.valueOf(c);
+    }
+
+    private void updateTextView() {
+        textTime.setText(getTimerText());
+        double d = distance / 1000;
+        String formatDistance = String.format("%.2f", d);
+        textDistance.setText(formatDistance);
+        textPace.setText(getPace());
+        textCalories.setText(getCalories());
     }
 
     @SuppressLint("MissingPermission")
