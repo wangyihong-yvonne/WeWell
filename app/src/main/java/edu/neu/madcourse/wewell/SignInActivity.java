@@ -25,18 +25,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-
 public class SignInActivity extends AppCompatActivity {
     private static final String TAG = SignInActivity.class.getSimpleName();
 
     private static final int GOOGLE_SIGN_IN = 101;
     private static final int EMAIL_SIGN_IN = 102;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
             // already signed in
@@ -128,6 +125,7 @@ public class SignInActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(getString(R.string.current_user_email), user.getEmail());
         editor.putString(getString(R.string.current_user_name), user.getDisplayName());
+        editor.putString(getString(R.string.current_user_id), user.getUid());
         // todo apply() changes the in-memory SharedPreferences object immediately
         //  but writes the updates to disk asynchronously. Alternatively,
         //  you can use commit() to write the data to disk synchronously.

@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import edu.neu.madcourse.wewell.service.UserService;
+
 import static android.view.View.OnClickListener;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -26,7 +28,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     FirebaseAuth firebaseAuth;
-
+    UserService userService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
         signup = findViewById(R.id.btnSignup);
         login = findViewById(R.id.btnLogin);
         firebaseAuth = FirebaseAuth.getInstance();
-
+        userService = new UserService();
         signup.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +59,9 @@ public class SignUpActivity extends AppCompatActivity {
                                                                 Toast.LENGTH_LONG).show();
                                                         email.setText("");
                                                         password.setText("");
+                                                        
+                                                        //create corresponding userId to Firestore
+                                                        userService.saveUser(firebaseAuth.getCurrentUser().getUid());
                                                     } else {
                                                         Toast.makeText(SignUpActivity.this, task1.getException().getMessage(),
                                                                 Toast.LENGTH_LONG).show();

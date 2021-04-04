@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         forgotPass = findViewById(R.id.btnUserForgottPass);
         back = findViewById(R.id.button2back);
         firebaseAuth = FirebaseAuth.getInstance();
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(getString(R.string.current_user_email), user.getEmail());
         editor.putString(getString(R.string.current_user_name), user.getDisplayName());
+        editor.putString(getString(R.string.current_user_id), user.getUid());
         // todo apply() changes the in-memory SharedPreferences object immediately
         //  but writes the updates to disk asynchronously. Alternatively,
         //  you can use commit() to write the data to disk synchronously.

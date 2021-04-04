@@ -55,16 +55,18 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import edu.neu.madcourse.wewell.R;
+import edu.neu.madcourse.wewell.model.Activity;
+import edu.neu.madcourse.wewell.model.User;
+import edu.neu.madcourse.wewell.service.ActivityService;
 
 public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
     private static final String TAG = DashboardFragment.class.getSimpleName();
     private GoogleMap map;
     private CameraPosition cameraPosition;
-
     // The entry point to the Places API.
     private PlacesClient placesClient;
-
+    private ActivityService activityService;
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient fusedLocationProviderClient;
 
@@ -74,7 +76,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     private static final int DEFAULT_ZOOM = 15;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean locationPermissionGranted;
-
+    private User currentUser;
 
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
@@ -93,6 +95,8 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     private Handler mHandler = null;
 
     private static int timeCount = 0; //in seconds
+    private static long pace = 0; // milliseconds/km
+    private static int calories = 0;
     private boolean isPause = false;
     private boolean isStop = true;
     private boolean isDrawRoute = false;
@@ -165,7 +169,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         btStop.setEnabled(false);
 
         startTracking();
-
+        activityService = new ActivityService();
         mHandler = new Handler() {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
@@ -183,9 +187,11 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String currentUserEmail = sharedPreferences.getString(getString(R.string.current_user_email), null);
         String currentUsername = sharedPreferences.getString(getString(R.string.current_user_name), null);
-
+        String currentUserId = sharedPreferences.getString(getString(R.string.current_user_id), null);
+        currentUser = new User(currentUserEmail, currentUsername, currentUserId);
         System.out.println(currentUserEmail);
         System.out.println(currentUsername);
+        System.out.println(currentUserId);
 
         return root;
     }
@@ -224,15 +230,21 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 if (isPause) {
                     isPause = !isPause;
                 }
+
                 btRun.setEnabled(true);
                 btPause.setEnabled(false);
                 btStop.setEnabled(false);
                 previousLocation = null;
                 lastKnownLocation = null;
+                Activity activity = new Activity(startTime, pace, distance, timeCount, calories);
+                activityService.saveActivity(activity, currentUser.getUid());
                 stopTimer();
                 isDrawRoute = false;
+
+
                 distance = 0;
                 routeLines.clear();
+
             }
         }
     };
@@ -291,7 +303,6 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
     private String getTimerText() {
         int rounded = Math.round(timeCount);
-
         int seconds = ((rounded % 86400) % 3600) % 60;
         int minutes = ((rounded % 86400) % 3600) / 60;
         int hours = ((rounded % 86400) / 3600);
@@ -303,18 +314,21 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         return String.format("%02d", hours) + " : " + String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
     }
 
+    //get formatted pace
     private String getPace() {
         long timeElapsed = startTime - System.currentTimeMillis();
-        long pace = (long) (timeElapsed / (distance / 1000));
+        long p = (long) (timeElapsed / (distance / 1000));
+        pace = p;
         long minutes = (pace / 1000) / 60;
         int seconds = (int) ((pace / 1000) % 60);
         System.out.println(minutes + "'" + seconds + "''");
         return minutes + "'" + seconds + "''";
     }
 
-    /*calories*/
+    // get formatted calories
     public String getCalories() {
-        int c = (int)((distance + timeCount)*0.25);
+        int c = (int)((distance + timeCount) * 0.25);
+        calories = c;
         return String.valueOf(c);
     }
 
