@@ -200,6 +200,8 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     private View.OnClickListener listener = new View.OnClickListener() {
         public void onClick(View v) {
             if (v == btRun) {
+                routeLines.clear();
+                map.clear();
                 startTimer();
                 btRun.setEnabled(false);
                 btPause.setEnabled(true);
@@ -240,10 +242,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 activityService.saveActivity(activity, currentUser.getUid());
                 stopTimer();
                 isDrawRoute = false;
-
-
                 distance = 0;
-                routeLines.clear();
 
             }
         }
@@ -316,7 +315,8 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
     //get formatted pace
     private String getPace() {
-        long timeElapsed = startTime - System.currentTimeMillis();
+        long timeElapsed = System.currentTimeMillis() - startTime;
+        System.out.println(timeElapsed);
         long p = (long) (timeElapsed / (distance / 1000));
         pace = p;
         long minutes = (pace / 1000) / 60;
