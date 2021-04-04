@@ -59,7 +59,6 @@ public class SignUpActivity extends AppCompatActivity {
                                                                 Toast.LENGTH_LONG).show();
                                                         email.setText("");
                                                         password.setText("");
-
                                                         //create corresponding userId to Firestore
                                                         userService.saveUser(firebaseAuth.getCurrentUser().getUid());
                                                     } else {
