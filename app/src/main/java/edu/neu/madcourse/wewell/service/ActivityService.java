@@ -30,6 +30,7 @@ public class ActivityService {
         //TODO call success or failure callback
     }
 
+    //TODO this method can be used to get user's activity history
     public List<Activity> getActivitiesFromUser(String userId) {
 
         return null;
