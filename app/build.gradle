@@ -47,6 +47,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
     implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.google.firebase:firebase-auth:20.0.3'
     // classpath 'com.google.gms:google-services:4.3.5'
     // Required only if Facebook login support is required
     // Find the latest Facebook SDK releases here: https://goo.gl/Ce5L94

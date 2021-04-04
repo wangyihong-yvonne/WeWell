@@ -94,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(getString(R.string.current_user_email), user.getEmail());
         editor.putString(getString(R.string.current_user_name), user.getDisplayName());
+        editor.putString(getString(R.string.current_user_id), user.getUid());
         // todo apply() changes the in-memory SharedPreferences object immediately
         //  but writes the updates to disk asynchronously. Alternatively,
         //  you can use commit() to write the data to disk synchronously.
