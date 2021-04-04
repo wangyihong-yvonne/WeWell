@@ -48,8 +48,6 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -200,6 +198,8 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     private View.OnClickListener listener = new View.OnClickListener() {
         public void onClick(View v) {
             if (v == btRun) {
+                routeLines.clear();
+                map.clear();
                 startTimer();
                 btRun.setEnabled(false);
                 btPause.setEnabled(true);
@@ -240,10 +240,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 activityService.saveActivity(activity, currentUser.getUid());
                 stopTimer();
                 isDrawRoute = false;
-
-
                 distance = 0;
-                routeLines.clear();
 
             }
         }
@@ -316,7 +313,8 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
     //get formatted pace
     private String getPace() {
-        long timeElapsed = startTime - System.currentTimeMillis();
+        long timeElapsed = System.currentTimeMillis() - startTime;
+        System.out.println(timeElapsed);
         long p = (long) (timeElapsed / (distance / 1000));
         pace = p;
         long minutes = (pace / 1000) / 60;
@@ -327,7 +325,8 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
     // get formatted calories
     public String getCalories() {
-        int c = (int)((distance + timeCount) * 0.25);
+        System.out.println("distance: " + distance);
+        int c = (int)((distance * 0.06));
         calories = c;
         return String.valueOf(c);
     }

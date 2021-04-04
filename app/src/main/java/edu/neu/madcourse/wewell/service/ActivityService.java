@@ -4,7 +4,6 @@ package edu.neu.madcourse.wewell.service;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +25,6 @@ public class ActivityService {
         db.collection("users")
                 .document(userId)
                 .update("activities", FieldValue.arrayUnion(activityMap));
-
         //TODO call success or failure callback
     }
 
