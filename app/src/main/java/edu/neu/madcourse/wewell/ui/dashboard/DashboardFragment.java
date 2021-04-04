@@ -327,7 +327,8 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
     // get formatted calories
     public String getCalories() {
-        int c = (int)((distance + timeCount) * 0.25);
+        System.out.println("distance: " + distance);
+        int c = (int)((distance * 0.06));
         calories = c;
         return String.valueOf(c);
     }
