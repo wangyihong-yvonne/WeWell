@@ -148,7 +148,6 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
         btRun = (Button) root.findViewById(R.id.button_run);
         btPause = (Button) root.findViewById(R.id.button_pause);
         btStop = (Button) root.findViewById(R.id.button_stop);
@@ -166,7 +165,6 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         btPause.setEnabled(false);
         btStop.setEnabled(false);
 
-        startTracking();
         activityService = new ActivityService();
         mHandler = new Handler() {
             public void handleMessage(Message msg) {
@@ -326,7 +324,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     // get formatted calories
     public String getCalories() {
         System.out.println("distance: " + distance);
-        int c = (int)((distance * 0.06));
+        int c = (int) ((distance * 0.06));
         calories = c;
         return String.valueOf(c);
     }
@@ -439,6 +437,8 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         updateLocationUI();
 
         getDeviceLocation();
+
+        startTracking();
     }
 
     // Gets the current location of the device, and positions the map's camera.
