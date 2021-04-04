@@ -19,6 +19,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import edu.neu.madcourse.wewell.service.UserService;
+
 public class LoginActivity extends AppCompatActivity {
     EditText email;
     EditText pass;
@@ -38,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         forgotPass = findViewById(R.id.btnUserForgottPass);
         back = findViewById(R.id.button2back);
         firebaseAuth = FirebaseAuth.getInstance();
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -56,6 +56,7 @@ import java.util.TimerTask;
 
 import edu.neu.madcourse.wewell.R;
 import edu.neu.madcourse.wewell.model.Activity;
+import edu.neu.madcourse.wewell.model.User;
 import edu.neu.madcourse.wewell.service.ActivityService;
 
 public class DashboardFragment extends Fragment implements OnMapReadyCallback {
@@ -75,7 +76,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     private static final int DEFAULT_ZOOM = 15;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean locationPermissionGranted;
-
+    private User currentUser;
 
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
@@ -187,7 +188,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         String currentUserEmail = sharedPreferences.getString(getString(R.string.current_user_email), null);
         String currentUsername = sharedPreferences.getString(getString(R.string.current_user_name), null);
         String currentUserId = sharedPreferences.getString(getString(R.string.current_user_id), null);
-
+        currentUser = new User(currentUserEmail, currentUsername, currentUserId);
         System.out.println(currentUserEmail);
         System.out.println(currentUsername);
         System.out.println(currentUserId);
@@ -236,8 +237,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 previousLocation = null;
                 lastKnownLocation = null;
                 Activity activity = new Activity(startTime, pace, distance, timeCount, calories);
-                //TODO get user id from firebase
-                activityService.saveActivity(activity, "UserId123");
+                activityService.saveActivity(activity, currentUser.getUid());
                 stopTimer();
                 isDrawRoute = false;
 
