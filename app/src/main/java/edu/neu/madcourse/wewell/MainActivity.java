@@ -1,15 +1,12 @@
 package edu.neu.madcourse.wewell;
 
-import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -20,11 +17,11 @@ import edu.neu.madcourse.wewell.ui.notifications.NotificationsFragment;
 public class MainActivity extends AppCompatActivity {
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
-    final Fragment fragment1 = new HomeFragment();
-    final Fragment fragment2 = new DashboardFragment();
-    final Fragment fragment3 = new NotificationsFragment();
+    final Fragment homeFragment = new HomeFragment();
+    final Fragment dashboardFragment = new DashboardFragment();
+    final Fragment notificationsFragment = new NotificationsFragment();
     final FragmentManager fm = getSupportFragmentManager();
-    Fragment active = fragment1;
+    Fragment active = dashboardFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,45 +29,34 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navView.setSelectedItemId(R.id.navigation_dashboard);
 
-        fm.beginTransaction().add(R.id.main_container, fragment3, "3").hide(fragment3).commit();
-        fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
-        fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
-
-        // check permission
-        if (ContextCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-        }
-
+        fm.beginTransaction().add(R.id.main_container, homeFragment, "home").hide(homeFragment).commit();
+        fm.beginTransaction().add(R.id.main_container, dashboardFragment, "dashboard").commit();
+        fm.beginTransaction().add(R.id.main_container, notificationsFragment, "notifications").hide(notificationsFragment).commit();
     }
 
     // see https://medium.com/@oluwabukunmi.aluko/bottom-navigation-view-with-fragments-a074bfd08711
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    fm.beginTransaction().hide(active).show(fragment1).commit();
-                    active = fragment1;
-                    return true;
+            = item -> {
+        switch (item.getItemId()) {
+            case R.id.navigation_home:
+                fm.beginTransaction().hide(active).show(homeFragment).commit();
+                active = homeFragment;
+                return true;
 
-                case R.id.navigation_dashboard:
-                    fm.beginTransaction().hide(active).show(fragment2).commit();
-                    active = fragment2;
-                    return true;
+            case R.id.navigation_dashboard:
+                fm.beginTransaction().hide(active).show(dashboardFragment).commit();
+                active = dashboardFragment;
+                return true;
 
-                case R.id.navigation_notifications:
-                    fm.beginTransaction().hide(active).show(fragment3).commit();
-                    active = fragment3;
-                    return true;
-            }
-            return false;
+            case R.id.navigation_notifications:
+                fm.beginTransaction().hide(active).show(notificationsFragment).commit();
+                active = notificationsFragment;
+                return true;
         }
+        return false;
     };
 
     @Override
