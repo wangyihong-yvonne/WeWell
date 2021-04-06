@@ -19,7 +19,8 @@
             android:layout_below="@+id/distance"
             android:layout_marginStart="-59dp"
             android:layout_marginTop="3dp"
-            android:layout_toEndOf="@id/distance" />
+            android:layout_toEndOf="@id/distance"
+            android:text="@string/distance_val" />
 
         <TextView
             android:id="@+id/distance"
