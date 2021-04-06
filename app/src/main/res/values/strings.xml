@@ -13,6 +13,11 @@
     <string name="current_user_id">current_user_id</string>
     <string name="fui_progress_dialog_signing_up">Creating your shiny new account...</string>
     <string name="sign_up">Sign up</string>
-    <string name="distance_val">distance_val</string>
     <string name="distance">Distance</string>
+    <string name="distance_val">distance_val</string>
+    <string name="pace">Pace</string>
+    <string name="time">Time</string>
+    <string name="startTimeVal">start_time_val</string>
+    <string name="calorie">Calorie</string>
+
 </resources>
