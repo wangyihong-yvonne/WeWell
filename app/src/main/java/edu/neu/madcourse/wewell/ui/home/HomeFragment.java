@@ -72,23 +72,17 @@ public class HomeFragment extends Fragment {
     private void init(boolean shouldCreateRecycler, boolean shouldNotifyDataChange, String currentUserId) {
         activityService.getActivitiesFromUser(new ActivityService.callBack() {
             @Override
-            public void callBack(List<Activity> activityListCallBack) {
-                if (activityListCallBack != null) {
-                    for (Activity activity : activityListCallBack) {
-                        activityList.add(activity);
-                        if (shouldCreateRecycler) {
-                            createRecycler();
-                        }
-                        if (shouldNotifyDataChange) {
-                            rviewAdapter.notifyDataSetChanged();
-                        }
+            public void callBack(List<Activity> activityList) {
+                if (activityList != null) {
+                    if (shouldCreateRecycler) {
+                        createRecycler(activityList);
                     }
-
+                    if (shouldNotifyDataChange) {
+                        rviewAdapter.notifyDataSetChanged();
+                    }
                 }
-
             }
         }, currentUserId);
-
     }
 
     public void signOut() {
@@ -105,7 +99,7 @@ public class HomeFragment extends Fragment {
         // [END auth_fui_signout]
     }
 
-    private void createRecycler() {
+    private void createRecycler(List<Activity> activityList) {
         rLayoutManger = new LinearLayoutManager(getContext());
         recyclerView = getView().findViewById(R.id.user_activity_list_recycler);
         recyclerView.setHasFixedSize(true);

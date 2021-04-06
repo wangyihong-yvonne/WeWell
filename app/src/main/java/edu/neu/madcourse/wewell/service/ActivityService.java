@@ -7,6 +7,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,7 +55,9 @@ public class ActivityService {
                         double distance = (double) map.get("distance");
                         long runningTime = (long) map.get("runningTime");
                         long calories = (long) map.get("calories");
-                        Activity activity = new Activity(startTime, pace, distance, runningTime, (int) calories);
+                        DecimalFormat df = new DecimalFormat("#.##");
+                        distance = Double.valueOf(df.format(distance));
+                        Activity activity = new Activity(startTime, pace,  distance, runningTime, (int) calories);
                         activitiesList.add(activity);
                     }
 
