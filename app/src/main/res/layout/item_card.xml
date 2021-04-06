@@ -1,38 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="2dp"
     android:background="#FFFFFF"
     app:cardCornerRadius="5dp">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp">
+        android:layout_height="102dp">
+
+        <TextView
+            android:id="@+id/start_time_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/distance"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_toEndOf="@id/distance"
+            android:text="@string/startTimeVal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/distance"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/distance_val"
+            app:layout_constraintEnd_toStartOf="@+id/Pace"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/distance_val"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/distance"
-            android:layout_marginStart="-59dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
             android:layout_toEndOf="@id/distance"
-            android:text="@string/distance_val" />
+            android:text="@string/distance_val"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/distance"
+            app:layout_constraintVertical_bias="0.2" />
 
         <TextView
-            android:id="@+id/distance"
+            android:id="@+id/distance3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="7dp"
-            android:text="@string/distance"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="67dp"
+            android:layout_marginBottom="2dp"
+            android:text="@string/calorie"
             android:textColor="@android:color/black"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/calorie_val"
+            app:layout_constraintEnd_toStartOf="@+id/distance4"
+            app:layout_constraintStart_toEndOf="@+id/Pace"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/distance4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="44dp"
+            android:layout_marginBottom="2dp"
+            android:text="@string/time"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/time_val"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/distance3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/Pace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="46dp"
+            android:layout_marginBottom="2dp"
+            android:text="@string/pace"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/pace_val"
+            app:layout_constraintEnd_toStartOf="@+id/distance3"
+            app:layout_constraintStart_toEndOf="@+id/distance"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pace_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="12dp"
+            android:text="pace_val"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/calorie_val"
+            app:layout_constraintStart_toEndOf="@+id/distance_val"
+            app:layout_constraintTop_toBottomOf="@+id/Pace"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/calorie_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="12dp"
+            android:text="calorie_val"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/time_val"
+            app:layout_constraintStart_toEndOf="@+id/pace_val"
+            app:layout_constraintTop_toBottomOf="@+id/distance3"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/time_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="12dp"
+            android:text="time_val"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/calorie_val"
+            app:layout_constraintTop_toBottomOf="@+id/distance4"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

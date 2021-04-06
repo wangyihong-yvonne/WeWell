@@ -317,7 +317,6 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         pace = p;
         long minutes = (pace / 1000) / 60;
         int seconds = (int) ((pace / 1000) % 60);
-        System.out.println(minutes + "'" + seconds + "''");
         return minutes + "'" + seconds + "''";
     }
 
