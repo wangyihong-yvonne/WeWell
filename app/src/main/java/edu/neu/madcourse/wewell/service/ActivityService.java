@@ -18,7 +18,6 @@ import edu.neu.madcourse.wewell.model.Activity;
 public class ActivityService {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-
     public void saveActivity(Activity activity, String userId) {
         // Add a new user document with a custom ID
         Map<String, Object> activityMap = new HashMap<>();
@@ -39,6 +38,20 @@ public class ActivityService {
 //        return null;
 //    }
 
+    public void updateTotalDistance(String userId, double currentDistance) {
+        DocumentReference documentReference = db.collection("users").document(userId);
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    long prevTotalDistance = (long) documentSnapshot.get("totalDistance"); // is this efficient?
+                    db.collection("users")
+                            .document(userId)
+                            .update("totalDistance", prevTotalDistance + currentDistance);
+                }
+            }
+        });
+    }
 
     public void getActivitiesFromUser(callBack callBack, String userId) {
         DocumentReference documentReference = db.collection("users").document(userId);
