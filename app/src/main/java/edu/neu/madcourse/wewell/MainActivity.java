@@ -32,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navView.setSelectedItemId(R.id.navigation_dashboard);
 
-        fm.beginTransaction().add(R.id.main_container, homeFragment, "home").hide(homeFragment).commit();
-        fm.beginTransaction().add(R.id.main_container, dashboardFragment, "dashboard").commit();
-        fm.beginTransaction().add(R.id.main_container, rewardsFragment, "rewards").hide(rewardsFragment).commit();
+        fm.beginTransaction().add(R.id.main_container, homeFragment, getString(R.string.title_home)).hide(homeFragment).commit();
+        fm.beginTransaction().add(R.id.main_container, dashboardFragment, getString(R.string.title_dashboard)).commit();
+        fm.beginTransaction().add(R.id.main_container, rewardsFragment, getString(R.string.title_rewards)).hide(rewardsFragment).commit();
     }
 
     // see https://medium.com/@oluwabukunmi.aluko/bottom-navigation-view-with-fragments-a074bfd08711
