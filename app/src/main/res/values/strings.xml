@@ -6,7 +6,7 @@
     <string name="title_activity_sign_in">SignInActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_rewards">Rewards</string>
     <string name="preference_file_key">wewell_preference</string>
     <string name="current_user_email">current_user_email</string>
     <string name="current_user_name">current_user_name</string>
