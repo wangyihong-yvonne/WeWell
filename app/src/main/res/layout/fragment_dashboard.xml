@@ -62,7 +62,7 @@
             android:layout_weight="2"
             android:gravity="center"
             android:text="0.00"
-            android:textSize="50dp" />
+            android:textSize="40dp" />
 
         <TextView
             android:id="@+id/text_length"
@@ -71,7 +71,7 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="KM"
-            android:textSize="30dp" />
+            android:textSize="25dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -87,7 +87,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="00'00''"
-            android:textSize="30dp" />
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/data_time"
@@ -96,7 +96,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="00:00:00"
-            android:textSize="30dp" />
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/data_calories"
@@ -105,7 +105,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="0"
-            android:textSize="30dp" />
+            android:textSize="25dp" />
     </LinearLayout>
 
     <LinearLayout
