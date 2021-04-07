@@ -56,6 +56,7 @@ import edu.neu.madcourse.wewell.R;
 import edu.neu.madcourse.wewell.model.Activity;
 import edu.neu.madcourse.wewell.model.User;
 import edu.neu.madcourse.wewell.service.ActivityService;
+import edu.neu.madcourse.wewell.util.Util;
 
 public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
@@ -315,14 +316,11 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         System.out.println(timeElapsed);
         long p = (long) (timeElapsed / (distance / 1000));
         pace = p;
-        long minutes = (pace / 1000) / 60;
-        int seconds = (int) ((pace / 1000) % 60);
-        return minutes + "'" + seconds + "''";
+        return Util.formatTime(pace);
     }
 
     // get formatted calories
     public String getCalories() {
-        System.out.println("distance: " + distance);
         int c = (int) ((distance * 0.06));
         calories = c;
         return String.valueOf(c);
@@ -375,7 +373,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
             lastKnownLocation = location;
             previousLocation = locationHistory.get(locationHistory.size() - 1);
             distance += lastKnownLocation.distanceTo(previousLocation);
-//            System.out.println("total distance: " + distance);
+            System.out.println("total distance: " + distance);
         }
         locationHistory.add(location);
 
