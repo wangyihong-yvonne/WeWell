@@ -6,10 +6,14 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import edu.neu.madcourse.wewell.R;
 import edu.neu.madcourse.wewell.model.Activity;
+import edu.neu.madcourse.wewell.util.Util;
 
 public class RviewAdapter extends RecyclerView.Adapter<RviewHolder> {
     public List<Activity> activityList;
@@ -32,8 +36,11 @@ public class RviewAdapter extends RecyclerView.Adapter<RviewHolder> {
     @Override
     public void onBindViewHolder(RviewHolder holder, int position) {
         Activity currentActivity = activityList.get(position);
-
-        holder.distance_value.setText(String.valueOf(currentActivity.getDistance()));
+        holder.distance_value.setText(currentActivity.getDistance() + " KM");
+        holder.calorie_value.setText(String.valueOf(currentActivity.getCalories()));
+        holder.pace_value.setText(Util.formatTime(currentActivity.getPace()));
+        holder.start_time_value.setText(Util.formatDate((currentActivity.getStartTime())));
+        holder.time_value.setText(Util.formatTime(currentActivity.getRunningTime()));
     }
 
     @Override

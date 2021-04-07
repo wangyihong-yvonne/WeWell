@@ -56,6 +56,7 @@ import edu.neu.madcourse.wewell.R;
 import edu.neu.madcourse.wewell.model.Activity;
 import edu.neu.madcourse.wewell.model.User;
 import edu.neu.madcourse.wewell.service.ActivityService;
+import edu.neu.madcourse.wewell.util.Util;
 
 public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
@@ -100,7 +101,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     private boolean isDrawRoute = false;
     private static int delay = 1000; //1s
     private static int period = 1000; //1s
-    private static double distance = 0;
+    private static double totalDistance = 0;
     private static final int UPDATE_TEXTVIEW = 0;
     private static long startTime = 0;
 
@@ -234,11 +235,11 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 btStop.setEnabled(false);
                 previousLocation = null;
                 lastKnownLocation = null;
-                Activity activity = new Activity(startTime, pace, distance, timeCount, calories);
+                Activity activity = new Activity(startTime, pace, totalDistance, timeCount, calories);
                 activityService.saveActivity(activity, currentUser.getUid());
                 stopTimer();
                 isDrawRoute = false;
-                distance = 0;
+                totalDistance = 0;
 
             }
         }
@@ -313,25 +314,23 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     private String getPace() {
         long timeElapsed = System.currentTimeMillis() - startTime;
         System.out.println(timeElapsed);
-        long p = (long) (timeElapsed / (distance / 1000));
-        pace = p;
-        long minutes = (pace / 1000) / 60;
-        int seconds = (int) ((pace / 1000) % 60);
-        System.out.println(minutes + "'" + seconds + "''");
-        return minutes + "'" + seconds + "''";
+        if (totalDistance > 1) {
+            long p = (long) (timeElapsed / (totalDistance / 1000));
+            pace = p;
+        }
+        return Util.formatTime(pace);
     }
 
     // get formatted calories
     public String getCalories() {
-        System.out.println("distance: " + distance);
-        int c = (int) ((distance * 0.06));
+        int c = (int) ((totalDistance * 0.06));
         calories = c;
         return String.valueOf(c);
     }
 
     private void updateTextView() {
         textTime.setText(getTimerText());
-        double d = distance / 1000;
+        double d = totalDistance / 1000;
         String formatDistance = String.format("%.2f", d);
         textDistance.setText(formatDistance);
         textPace.setText(getPace());
@@ -375,8 +374,14 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         } else {
             lastKnownLocation = location;
             previousLocation = locationHistory.get(locationHistory.size() - 1);
-            distance += lastKnownLocation.distanceTo(previousLocation);
-//            System.out.println("total distance: " + distance);
+            double distance = lastKnownLocation.distanceTo(previousLocation);
+
+            //add to the total distance 
+            // only when the distance between current and previous locations is greater than 0.5 meter
+            if (distance > 0.5) {
+                totalDistance += lastKnownLocation.distanceTo(previousLocation);
+            }
+            System.out.println("total distance: " + totalDistance);
         }
         locationHistory.add(location);
 
