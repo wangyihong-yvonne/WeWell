@@ -13,6 +13,17 @@ public class RewardService {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    public void updateReward(String userId, double currentDistance) {
+
+        // get default goals
+        DocumentReference documentReference = db.collection("DefaultGoals").document(userId);
+        documentReference.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                // todo
+            }
+        });
+    }
+
     public void getRewardsByUser(CallBack callBack, String userId) {
         DocumentReference documentReference = db.collection("users").document(userId);
         documentReference.get().addOnSuccessListener(documentSnapshot -> {
@@ -25,7 +36,7 @@ public class RewardService {
                         String title = (String) map.get("title");
                         long goal = (long) map.get("goal");
                         long finishedDistance = (long) map.get("finishedDistance");
-                        int type = ((Number)map.get("type")).intValue();
+                        int type = ((Number) map.get("type")).intValue();
                         Reward reward = new Reward();
                         reward.setTitle(title);
                         reward.setGoal(goal);
