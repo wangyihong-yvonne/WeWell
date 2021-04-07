@@ -20,21 +20,21 @@ public class RewardService {
                 // todo
                 List<Map<String, Object>> rewardsFromDB = (List<Map<String, Object>>) documentSnapshot.get("rewards");
                 List<Reward> rewardList = new ArrayList<>();
-
-                for (Map<String, Object> map : rewardsFromDB) {
-                    String title = (String) map.get("title");
-                    long goal = (long) map.get("goal");
-                    long finishedDistance = (long) map.get("finishedDistance");
-                    int type = ((Number)map.get("type")).intValue();
-
-                    Reward reward = new Reward();
-                    reward.setTitle(title);
-                    reward.setGoal(goal);
-                    reward.setFinishedDistance(finishedDistance);
-                    reward.setType(type);
-
-                    rewardList.add(reward);
+                if (rewardsFromDB != null) {
+                    for (Map<String, Object> map : rewardsFromDB) {
+                        String title = (String) map.get("title");
+                        long goal = (long) map.get("goal");
+                        long finishedDistance = (long) map.get("finishedDistance");
+                        int type = ((Number)map.get("type")).intValue();
+                        Reward reward = new Reward();
+                        reward.setTitle(title);
+                        reward.setGoal(goal);
+                        reward.setFinishedDistance(finishedDistance);
+                        reward.setType(type);
+                        rewardList.add(reward);
+                    }
                 }
+
 
                 System.out.println(rewardList);
                 callBack.callBack(rewardList);
