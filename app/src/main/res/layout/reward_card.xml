@@ -5,9 +5,12 @@
     android:id="@+id/reward_material_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
     android:checkable="true"
     android:clickable="true"
     android:focusable="true"
+    app:cardBackgroundColor="#ECF3FA"
+    app:cardElevation="1dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent">
 
