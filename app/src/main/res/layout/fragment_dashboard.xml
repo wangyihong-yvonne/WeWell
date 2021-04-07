@@ -7,31 +7,31 @@
     android:orientation="vertical"
     tools:context=".ui.dashboard.DashboardFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal">-->
 
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:text="THEME"/>
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/history_open"-->
-<!--            android:layout_width="0dp"-->
+<!--        <Switch-->
+<!--            android:id="@+id/switch1"-->
+<!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="230dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="History"-->
-<!--            android:background="@android:color/transparent"/>-->
-    </LinearLayout>
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentLeft="true"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:text="THEME"/>-->
+
+<!--&lt;!&ndash;        <ImageButton&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/history_open"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_marginLeft="230dp"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_weight="1"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="History"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:background="@android:color/transparent"/>&ndash;&gt;-->
+<!--    </LinearLayout>-->
 
 
 
@@ -158,7 +158,7 @@
             android:layout_margin="15dp"
             android:layout_weight="1"
             android:text="PAUSE"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:textStyle="bold" />
 
 <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
@@ -189,7 +189,7 @@
             android:layout_margin="15dp"
             android:layout_weight="1"
             android:text="STOP"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:textStyle="bold" />
     </LinearLayout>
 
