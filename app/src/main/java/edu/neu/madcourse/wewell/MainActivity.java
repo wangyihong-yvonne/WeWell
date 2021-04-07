@@ -12,14 +12,14 @@ import androidx.fragment.app.FragmentManager;
 
 import edu.neu.madcourse.wewell.ui.dashboard.DashboardFragment;
 import edu.neu.madcourse.wewell.ui.home.HomeFragment;
-import edu.neu.madcourse.wewell.ui.notifications.NotificationsFragment;
+import edu.neu.madcourse.wewell.ui.rewards.RewardsFragment;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
     final Fragment homeFragment = new HomeFragment();
     final Fragment dashboardFragment = new DashboardFragment();
-    final Fragment notificationsFragment = new NotificationsFragment();
+    final Fragment rewardsFragment = new RewardsFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = dashboardFragment;
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         fm.beginTransaction().add(R.id.main_container, homeFragment, "home").hide(homeFragment).commit();
         fm.beginTransaction().add(R.id.main_container, dashboardFragment, "dashboard").commit();
-        fm.beginTransaction().add(R.id.main_container, notificationsFragment, "notifications").hide(notificationsFragment).commit();
+        fm.beginTransaction().add(R.id.main_container, rewardsFragment, "rewards").hide(rewardsFragment).commit();
     }
 
     // see https://medium.com/@oluwabukunmi.aluko/bottom-navigation-view-with-fragments-a074bfd08711
@@ -51,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
                 active = dashboardFragment;
                 return true;
 
-            case R.id.navigation_notifications:
-                fm.beginTransaction().hide(active).show(notificationsFragment).commit();
-                active = notificationsFragment;
+            case R.id.navigation_rewards:
+                fm.beginTransaction().hide(active).show(rewardsFragment).commit();
+                active = rewardsFragment;
                 return true;
         }
         return false;
