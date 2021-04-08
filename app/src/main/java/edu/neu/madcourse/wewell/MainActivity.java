@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import edu.neu.madcourse.wewell.ui.dashboard.DashboardFragment;
 import edu.neu.madcourse.wewell.ui.home.HomeFragment;
@@ -68,7 +69,10 @@ public class MainActivity extends AppCompatActivity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    recreate();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.detach(dashboardFragment);
+                    fragmentTransaction.attach(dashboardFragment);
+                    fragmentTransaction.commit();
                 }
             }
         }

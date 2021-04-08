@@ -36,7 +36,7 @@ public class RviewAdapter extends RecyclerView.Adapter<RviewHolder> {
         holder.title.setText(String.valueOf(currentReward.getTitle()));
         double left = currentReward.getGoal() - currentReward.getFinishedDistance();
         String formatDistance = String.format("%.2f", left);
-        holder.description.setText(formatDistance + " miles left");
+        holder.description.setText(formatDistance + " kilometers left");
         int progress = (int)(currentReward.getFinishedDistance() * 100 / currentReward.getGoal());
         holder.progressBar.setProgress(progress);
     }
