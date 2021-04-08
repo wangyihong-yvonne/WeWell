@@ -338,7 +338,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         long timeElapsed = System.currentTimeMillis() - startTime;
         System.out.println(timeElapsed);
         if (totalDistance > 1) {
-            long p = (long) (timeElapsed / (totalDistance / 1000));
+            long p = (long) (timeElapsed / totalDistance);
             pace = p;
         }
         return Util.formatTime(pace);
@@ -353,7 +353,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
 
     private void updateTextView() {
         textTime.setText(getTimerText());
-        double d = totalDistance / 1000;
+        double d = totalDistance;
         String formatDistance = String.format("%.2f", d);
         textDistance.setText(formatDistance);
         textPace.setText(getPace());
@@ -402,7 +402,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
             //add to the total distance 
             // only when the distance between current and previous locations is greater than 0.5 meter
             if (distance > 0.5) {
-                totalDistance += lastKnownLocation.distanceTo(previousLocation);
+                totalDistance += lastKnownLocation.distanceTo(previousLocation) / 1000.0;
             }
             System.out.println("total distance: " + totalDistance);
         }
