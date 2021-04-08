@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -56,6 +57,7 @@ import edu.neu.madcourse.wewell.R;
 import edu.neu.madcourse.wewell.model.Activity;
 import edu.neu.madcourse.wewell.model.User;
 import edu.neu.madcourse.wewell.service.ActivityService;
+import edu.neu.madcourse.wewell.service.RewardService;
 import edu.neu.madcourse.wewell.util.Util;
 
 public class DashboardFragment extends Fragment implements OnMapReadyCallback {
@@ -66,6 +68,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     // The entry point to the Places API.
     private PlacesClient placesClient;
     private ActivityService activityService;
+    private RewardService rewardService;
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient fusedLocationProviderClient;
 
@@ -167,6 +170,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         btStop.setEnabled(false);
 
         activityService = new ActivityService();
+        rewardService = new RewardService();
         mHandler = new Handler() {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
@@ -237,6 +241,16 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 lastKnownLocation = null;
                 Activity activity = new Activity(startTime, pace, totalDistance, timeCount, calories);
                 activityService.saveActivity(activity, currentUser.getUid());
+                // refresh activity history
+                refreshFragment(getString(R.string.title_home));
+                // update current user's total distance
+                activityService.updateTotalDistance(currentUser.getUid(), totalDistance);
+                // update user's reward
+                rewardService.updateReward(cb -> {
+                    // refresh rewards
+                    refreshFragment(getString(R.string.title_rewards));
+                }, currentUser.getUid(), totalDistance);
+
                 stopTimer();
                 isDrawRoute = false;
                 totalDistance = 0;
@@ -244,6 +258,15 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
             }
         }
     };
+
+
+    private void refreshFragment(String fragmentName) {
+        Fragment currentFragment = getFragmentManager().findFragmentByTag(fragmentName);
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.detach(currentFragment);
+        fragmentTransaction.attach(currentFragment);
+        fragmentTransaction.commit();
+    }
 
     private void startTimer() {
         if (mTimer == null) {

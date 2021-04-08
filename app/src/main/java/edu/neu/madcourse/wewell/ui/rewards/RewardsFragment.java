@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -25,6 +26,7 @@ public class RewardsFragment extends Fragment {
     private RecyclerView.LayoutManager rLayoutManger;
     private RewardService rewardService;
 
+    private TextView totalDistanceView;
 
     public RewardsFragment() {
         // Required empty public constructor
@@ -39,6 +41,7 @@ public class RewardsFragment extends Fragment {
 
         rewardService = new RewardService();
         init(true, false, currentUserId);
+        totalDistanceView = root.findViewById(R.id.total_distance);
         return root;
     }
 
@@ -54,6 +57,10 @@ public class RewardsFragment extends Fragment {
             }
         }, currentUserId);
 
+        rewardService.getTotalDistanceByUser(distance -> {
+            String formatDistance = String.format("%.2f", distance);
+            totalDistanceView.setText(formatDistance);
+        }, currentUserId);
     }
 
     private void createRecycler(List<Reward> rewardList) {

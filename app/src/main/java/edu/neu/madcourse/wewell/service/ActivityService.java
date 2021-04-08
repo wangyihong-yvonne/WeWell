@@ -18,7 +18,6 @@ import edu.neu.madcourse.wewell.model.Activity;
 public class ActivityService {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-
     public void saveActivity(Activity activity, String userId) {
         // Add a new user document with a custom ID
         Map<String, Object> activityMap = new HashMap<>();
@@ -39,6 +38,19 @@ public class ActivityService {
 //        return null;
 //    }
 
+    public void updateTotalDistance(String userId, double currentDistance) {
+        db.collection("users").document(userId)
+                .collection("totalDistance").document("total").get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        double prevTotalDistance = ((Number) documentSnapshot.get("distance")).doubleValue();
+                        double newTotal = prevTotalDistance + currentDistance;
+                        db.collection("users").document(userId)
+                                .collection("totalDistance")
+                                .document("total").update("distance", newTotal);
+                    }
+                });
+    }
 
     public void getActivitiesFromUser(callBack callBack, String userId) {
         DocumentReference documentReference = db.collection("users").document(userId);
@@ -57,7 +69,7 @@ public class ActivityService {
                         long calories = (long) map.get("calories");
                         DecimalFormat df = new DecimalFormat("#.##");
                         distance = Double.valueOf(df.format(distance));
-                        Activity activity = new Activity(startTime, pace,  distance, runningTime, (int) calories);
+                        Activity activity = new Activity(startTime, pace, distance, runningTime, (int) calories);
                         activitiesList.add(activity);
                     }
 
