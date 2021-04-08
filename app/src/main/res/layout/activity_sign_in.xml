@@ -24,8 +24,8 @@
     <com.firebase.ui.auth.util.ui.SupportVectorDrawablesButton
         android:id="@+id/sign_in_with_google"
         style="@style/FirebaseUI.Button.AccountChooser.GoogleButton"
-        android:layout_width="224dp"
-        android:layout_height="47dp"
+        android:layout_width="222dp"
+        android:layout_height="50dp"
         android:text="@string/fui_sign_in_with_google"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

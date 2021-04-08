@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,6 +28,8 @@ import edu.neu.madcourse.wewell.service.ActivityService;
 
 public class HomeFragment extends Fragment {
 
+    private Context context;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -39,6 +40,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private RviewAdapter rviewAdapter;
     private RecyclerView.LayoutManager rLayoutManger;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class HomeFragment extends Fragment {
                 signOut();
             }
         });
+        //Button shareButton =
 
         init(true, false, currentUserId);
 //        getUserActivitiesButton.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +106,7 @@ public class HomeFragment extends Fragment {
         rLayoutManger = new LinearLayoutManager(getContext());
         recyclerView = getView().findViewById(R.id.user_activity_list_recycler);
         recyclerView.setHasFixedSize(true);
-        rviewAdapter = new RviewAdapter(activityList);
+        rviewAdapter = new RviewAdapter(activityList,getContext());
         recyclerView.setAdapter(rviewAdapter);
         recyclerView.setLayoutManager(rLayoutManger);
     }
