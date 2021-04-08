@@ -25,11 +25,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import edu.neu.madcourse.wewell.service.UserService;
+
 public class SignInActivity extends AppCompatActivity {
     private static final String TAG = SignInActivity.class.getSimpleName();
 
     private static final int GOOGLE_SIGN_IN = 101;
     private static final int EMAIL_SIGN_IN = 102;
+
+    UserService userService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +52,8 @@ public class SignInActivity extends AppCompatActivity {
 
         Button emailButton = (Button) findViewById(R.id.sign_in_with_email);
         emailButton.setOnClickListener(v -> onEmailSignIn());
+
+        userService = new UserService();
 
     }
 
@@ -132,6 +139,8 @@ public class SignInActivity extends AppCompatActivity {
         //  But because commit() is synchronous, you should avoid calling it
         //  from your main thread because it could pause your UI rendering.
         editor.commit();
+
+        userService.saveUser(user.getUid());
     }
 
     private void startMainActivity() {

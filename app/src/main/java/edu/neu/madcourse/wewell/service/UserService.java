@@ -1,18 +1,16 @@
 package edu.neu.madcourse.wewell.service;
 
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import edu.neu.madcourse.wewell.model.Activity;
+import edu.neu.madcourse.wewell.model.Reward;
 
 public class UserService {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -24,7 +22,35 @@ public class UserService {
         userData.put("activities", new ArrayList<Activity>());
         db.collection("users")
                 .document(uid)
-                .set(userData);
+                .set(userData).addOnSuccessListener(aVoid -> {
+            // save default rewards
+            CollectionReference defaultGoals = db.collection("DefaultGoals");
+            defaultGoals.get().addOnSuccessListener(queryDocumentSnapshots -> {
+                List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
+                if (queryDocumentSnapshots != null) {
+                    documentSnapshots.forEach(documentSnapshot -> {
+                        Map<String, Object> defaultReward = documentSnapshot.getData();
+                        Reward reward = new Reward();
+                        reward.setGoal(((Number) defaultReward.get("distance")).doubleValue());
+                        reward.setFinishedDistance(0);
+                        reward.setTitle((String) defaultReward.get("title"));
+                        reward.setFinished(false);
+                        reward.setType(0);
+
+                        db.collection("users").document(uid).collection("rewards")
+                                .document(documentSnapshot.getId()).set(reward);
+
+                        Map<String, Double> map = new HashMap<>();
+                        map.put("distance", 0.0);
+                        // set total distance
+                        db.collection("users").document(uid)
+                                .collection("totalDistance")
+                                .document("total").set(map);
+                    });
+                }
+            });
+        });
+
     }
 
 

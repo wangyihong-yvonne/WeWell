@@ -4,9 +4,9 @@ public class Reward {
     private String title;
     private int type;
     private long progress;
-    private long goal;
-    private long finishedDistance;
-    private boolean isDone;
+    private double goal;
+    private double finishedDistance;
+    private boolean isFinished;
 
     public String getTitle() {
         return title;
@@ -32,27 +32,27 @@ public class Reward {
         this.progress = progress;
     }
 
-    public long getGoal() {
+    public double getGoal() {
         return goal;
     }
 
-    public void setGoal(long goal) {
+    public void setGoal(double goal) {
         this.goal = goal;
     }
 
-    public long getFinishedDistance() {
+    public double getFinishedDistance() {
         return finishedDistance;
     }
 
-    public void setFinishedDistance(long finishedDistance) {
+    public void setFinishedDistance(double finishedDistance) {
         this.finishedDistance = finishedDistance;
     }
 
-    public boolean isDone() {
-        return isDone;
+    public boolean isFinished() {
+        return isFinished;
     }
 
-    public void setDone(boolean done) {
-        isDone = done;
+    public void setFinished(boolean finished) {
+        isFinished = finished;
     }
 }

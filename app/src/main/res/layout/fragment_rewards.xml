@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="TextView"
+        android:text="0"
         android:textColor="#03DAC5"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/textView5"

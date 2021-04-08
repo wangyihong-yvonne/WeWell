@@ -170,6 +170,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         btStop.setEnabled(false);
 
         activityService = new ActivityService();
+        rewardService = new RewardService();
         mHandler = new Handler() {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
@@ -245,9 +246,10 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 // update current user's total distance
                 activityService.updateTotalDistance(currentUser.getUid(), totalDistance);
                 // update user's reward
-                rewardService.updateReward(currentUser.getUid(), totalDistance);
-                // refresh rewards
-                refreshFragment(getString(R.string.title_rewards));
+                rewardService.updateReward(cb -> {
+                    // refresh rewards
+                    refreshFragment(getString(R.string.title_rewards));
+                }, currentUser.getUid(), totalDistance);
 
                 stopTimer();
                 isDrawRoute = false;
