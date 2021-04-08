@@ -1,6 +1,7 @@
 package edu.neu.madcourse.wewell.ui.home;
 
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,7 @@ public class RviewHolder extends RecyclerView.ViewHolder {
     public TextView pace_value;
     public TextView calorie_value;
     public TextView time_value;
+    public ImageButton imageButton;
 
     public RviewHolder(View itemView, final ItemClickListener listener) {
         super(itemView);
@@ -22,6 +24,8 @@ public class RviewHolder extends RecyclerView.ViewHolder {
         pace_value = itemView.findViewById(R.id.pace_val);
         calorie_value = itemView.findViewById(R.id.calorie_val);
         time_value = itemView.findViewById(R.id.time_val);
+        imageButton = itemView.findViewById(R.id.imageButton);
+
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,5 +38,6 @@ public class RviewHolder extends RecyclerView.ViewHolder {
                 }
             }
         });
+
     }
 }
