@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import edu.neu.madcourse.wewell.R;
-import edu.neu.madcourse.wewell.model.Activity;
 import edu.neu.madcourse.wewell.model.Reward;
 
 public class RviewAdapter extends RecyclerView.Adapter<RviewHolder> {
