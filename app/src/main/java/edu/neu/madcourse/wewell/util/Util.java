@@ -7,8 +7,8 @@ import java.util.Date;
 public class Util {
 
     public static String formatTime(long time) {
-        long minutes = (time / 1000) / 60;
-        int seconds = (int) ((time / 1000) % 60);
+        long minutes = time / 60;
+        int seconds = (int) (time % 60);
         String formattedTime = minutes + "'" + seconds + "''";
         return formattedTime;
     }
