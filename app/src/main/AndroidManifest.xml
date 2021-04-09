@@ -15,10 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeWell">
+
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:configChanges="orientation|screenSize"/>
+            android:configChanges="orientation|screenSize"
+           />
         <activity
             android:name=".PasswordActivity"
             android:label="PasswordActivity"/>
@@ -33,13 +35,16 @@
             android:name=".SignUpActivity"
             android:label="SignUpActivity"/>
 
-        <activity android:name=".WelcomeActivity"
+        <activity
+            android:name=".WelcomeActivity"
             android:label="@string/title_activity_welcome">
+            android:theme="@style/generalnotitle"
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <!--
