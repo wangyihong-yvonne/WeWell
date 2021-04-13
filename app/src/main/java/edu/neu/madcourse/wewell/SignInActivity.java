@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -53,6 +54,12 @@ public class SignInActivity extends AppCompatActivity {
 
         Button emailButton = (Button) findViewById(R.id.sign_in_with_email);
         emailButton.setOnClickListener(v -> onEmailSignIn());
+
+        TextView signInTextView = (TextView) findViewById(R.id.sign_in_has_account);
+        signInTextView.setOnClickListener(v -> {
+            startActivity(new Intent(SignInActivity.this, LoginActivity.class));
+            finish();
+        });
 
         userService = new UserService();
 
