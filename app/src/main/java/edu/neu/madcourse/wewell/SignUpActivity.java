@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,9 +25,11 @@ import static android.view.View.OnClickListener;
 public class SignUpActivity extends AppCompatActivity {
     EditText email;
     EditText password;
+    EditText confirmPassword;
     Button signup;
-    Button login;
-
+    TextView login;
+    ImageView btnBackArrow;
+    TextView btnBack;
 
     FirebaseAuth firebaseAuth;
     UserService userService;
@@ -33,18 +37,24 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_signlogin);
+        setContentView(R.layout.activity_signup);
         email = findViewById(R.id.etEmail);
         password = findViewById(R.id.etPassword);
+        confirmPassword = findViewById(R.id.etConfirmPassword);
         signup = findViewById(R.id.btnSignup);
         login = findViewById(R.id.btnLogin);
+        btnBackArrow = findViewById(R.id.btnBackArrow);
+        btnBack = findViewById(R.id.btnBack);
         firebaseAuth = FirebaseAuth.getInstance();
         userService = new UserService();
+//        signup.setEnabled(false);
         signup.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(password.getText().toString())) {
+                if (TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) || TextUtils.isEmpty(confirmPassword.getText().toString())) {
                     Toast.makeText(SignUpActivity.this, "Email Address or Password can't be empty.", Toast.LENGTH_LONG).show();
+                } else if(!password.getText().toString().equals(confirmPassword.getText().toString())) {
+                    Toast.makeText(SignUpActivity.this, "Password do not match.", Toast.LENGTH_LONG).show();
                 } else {
                     firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(),
                             password.getText().toString())
@@ -56,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         firebaseAuth.getCurrentUser().sendEmailVerification()
                                                 .addOnCompleteListener(task1 -> {
                                                     if (task1.isSuccessful()) {
-                                                        Toast.makeText(SignUpActivity.this, "Welcome to Wewell. Please check your email for verification",
+                                                        Toast.makeText(SignUpActivity.this, "Welcome to WeWell. Please check your email for verification",
                                                                 Toast.LENGTH_LONG).show();
                                                         email.setText("");
                                                         password.setText("");
@@ -84,5 +94,10 @@ public class SignUpActivity extends AppCompatActivity {
                 startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
             }
         });
+    }
+
+    public void onBackButton(View view) {
+        startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
+
     }
 }
