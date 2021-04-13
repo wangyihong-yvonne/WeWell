@@ -23,5 +23,6 @@
     <string name="send_my_password">Send my password</string>
     <string name="go_back_to_signup">Go back to SignUp</string>
     <string name="email">📧Email</string>
+    <string name="login_in" translatable="false"><u>Log In</u></string>
 
 </resources>
