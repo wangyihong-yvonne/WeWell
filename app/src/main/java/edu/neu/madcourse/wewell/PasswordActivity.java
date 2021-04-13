@@ -58,7 +58,7 @@ public class PasswordActivity extends AppCompatActivity {
         userBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PasswordActivity.this, SignUpActivity.class));
+                startActivity(new Intent(PasswordActivity.this, LoginActivity.class));
             }
         });
     }
