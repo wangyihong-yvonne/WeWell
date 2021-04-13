@@ -81,7 +81,7 @@ public class SignInActivity extends AppCompatActivity {
     public void onEmailSignIn() {
         // todo
         // use startActivityForResult(signInIntent, EMAIL_SIGN_IN);
-        startActivity(new Intent(SignInActivity.this, LoginActivity.class));
+        startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
         finish();
     }
 
