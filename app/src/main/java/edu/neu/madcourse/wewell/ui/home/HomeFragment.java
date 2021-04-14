@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -35,7 +36,6 @@ public class HomeFragment extends Fragment {
     }
 
     private List<Activity> activityList = new LinkedList<>();
-
     private ActivityService activityService;
     private RecyclerView recyclerView;
     private RviewAdapter rviewAdapter;
@@ -51,14 +51,17 @@ public class HomeFragment extends Fragment {
         String currentUserId = sharedPreferences.getString(getString(R.string.current_user_id), null);
 
         Button signOutButton = (Button) root.findViewById(R.id.sign_out_button);
-//        Button getUserActivitiesButton = (Button) root.findViewById(R.id.get_activities);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signOut();
             }
         });
-        //Button shareButton =
+
+        //new
+        TextView textView = (TextView) root.findViewById(R.id.textView);
+        String username = currentUserId;
+        textView.setText(username);
 
         init(true, false, currentUserId);
 //        getUserActivitiesButton.setOnClickListener(new View.OnClickListener() {
