@@ -3,11 +3,14 @@ package edu.neu.madcourse.wewell;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,8 +26,11 @@ public class LoginActivity extends AppCompatActivity {
     EditText email;
     EditText pass;
     Button login;
-    Button forgotPass;
-    Button back;
+//    Button forgotPass;
+    TextView forgotPass;
+    TextView back;
+    ImageView btnBackArrow2;
+    TextView btnBack2;
 
     FirebaseAuth firebaseAuth;
 
@@ -36,14 +42,23 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.Email2);
         pass = findViewById(R.id.Pass2);
         login = findViewById(R.id.btnSogin);
-        forgotPass = findViewById(R.id.btnUserForgottPass);
-        back = findViewById(R.id.button2back);
+        forgotPass = findViewById(R.id.textviewf);
+        back = findViewById(R.id.textviewsu);
         firebaseAuth = FirebaseAuth.getInstance();
+        btnBackArrow2 = findViewById(R.id.btnBackArrow2);
+        btnBack2 = findViewById(R.id.btnBack2);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(pass.getText().toString())) {
-                    Toast.makeText(LoginActivity.this, "Email Address or Password can't be empty.", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(LoginActivity.this, "Email Address or Password can't be empty.", Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(LoginActivity.this, "Email Address or Password can't be empty.", Toast.LENGTH_LONG);
+                    View toastView = toast.getView();
+                    toastView.setBackgroundColor(Color.BLACK); //any color your want
+                    TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                    toastMessage.setTextColor(Color.WHITE);
+                    toast.show();
+
                 } else {
                     firebaseAuth.signInWithEmailAndPassword(email.getText().toString(),
                             pass.getText().toString())
@@ -101,5 +116,9 @@ public class LoginActivity extends AppCompatActivity {
         //  But because commit() is synchronous, you should avoid calling it
         //  from your main thread because it could pause your UI rendering.
         editor.commit();
+    }
+
+    public void onBackButton2(View view) {
+        startActivity(new Intent(LoginActivity.this, SignInActivity.class));
     }
 }
