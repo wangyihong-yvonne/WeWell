@@ -36,7 +36,6 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private List<Activity> activityList = new LinkedList<>();
     private ActivityService activityService;
     private RecyclerView recyclerView;
     private RviewAdapter rviewAdapter;
