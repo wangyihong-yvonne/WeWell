@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,9 +19,9 @@ import com.google.firebase.auth.FirebaseAuth;
 public class PasswordActivity extends AppCompatActivity {
     EditText userEmail;
     Button userPass;
-    Button userBack;
-
+    TextView userBack;
     FirebaseAuth firebaseAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
