@@ -231,12 +231,13 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 // refresh activity history
                 refreshFragment(getString(R.string.title_home));
                 // update current user's total distance
-                activityService.updateTotalDistance(currentUser.getUid(), totalDistance);
-                // update user's reward
-                rewardService.updateReward(cb -> {
-                    // refresh rewards
-                    refreshFragment(getString(R.string.title_rewards));
-                }, currentUser, totalDistance);
+                activityService.updateTotalDistance(cb -> {
+                    // update user's reward
+                    rewardService.updateReward(cb2 -> {
+                        // refresh rewards
+                        refreshFragment(getString(R.string.title_rewards));
+                    }, currentUser, totalDistance);
+                }, currentUser.getUid(), totalDistance);
 
                 stopTimer();
                 isDrawRoute = false;
