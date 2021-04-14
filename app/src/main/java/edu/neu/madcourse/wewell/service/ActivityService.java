@@ -38,7 +38,7 @@ public class ActivityService {
 //        return null;
 //    }
 
-    public void updateTotalDistance(String userId, double currentDistance) {
+    public void updateTotalDistance(RefreshTotalCallback callback, String userId, double currentDistance) {
         db.collection("users").document(userId)
                 .collection("totalDistance").document("total").get()
                 .addOnSuccessListener(documentSnapshot -> {
@@ -47,7 +47,10 @@ public class ActivityService {
                         double newTotal = prevTotalDistance + currentDistance;
                         db.collection("users").document(userId)
                                 .collection("totalDistance")
-                                .document("total").update("distance", newTotal);
+                                .document("total").update("distance", newTotal)
+                        .addOnSuccessListener(aVoid -> {
+                            callback.callBack(0);
+                        });
                     }
                 });
     }
@@ -82,6 +85,11 @@ public class ActivityService {
     //use callback to retrieve data from firebase.
     public interface callBack {
         void callBack(List<Activity> activityList);
+
+    }
+
+    public interface RefreshTotalCallback {
+        void callBack(int i);
 
     }
 
