@@ -58,7 +58,6 @@ public class SignInActivity extends AppCompatActivity {
         TextView signInTextView = (TextView) findViewById(R.id.sign_in_has_account);
         signInTextView.setOnClickListener(v -> {
             startActivity(new Intent(SignInActivity.this, LoginActivity.class));
-            finish();
         });
 
         userService = new UserService();
@@ -82,7 +81,6 @@ public class SignInActivity extends AppCompatActivity {
         // todo
         // use startActivityForResult(signInIntent, EMAIL_SIGN_IN);
         startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
-        finish();
     }
 
     // [START auth_fui_result]

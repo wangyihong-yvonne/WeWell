@@ -47,14 +47,13 @@ public class SignUpActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         firebaseAuth = FirebaseAuth.getInstance();
         userService = new UserService();
-//        signup.setEnabled(false);
         signup.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) || TextUtils.isEmpty(confirmPassword.getText().toString())) {
                     Toast.makeText(SignUpActivity.this, "Email Address or Password can't be empty.", Toast.LENGTH_LONG).show();
                 } else if(!password.getText().toString().equals(confirmPassword.getText().toString())) {
-                    Toast.makeText(SignUpActivity.this, "Password do not match.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Passwords do not match.", Toast.LENGTH_LONG).show();
                 } else {
                     firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(),
                             password.getText().toString())
@@ -98,6 +97,5 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void onBackButton(View view) {
         startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
-
     }
 }
