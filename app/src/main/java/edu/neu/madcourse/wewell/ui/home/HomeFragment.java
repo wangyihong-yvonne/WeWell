@@ -26,7 +26,6 @@ import edu.neu.madcourse.wewell.R;
 import edu.neu.madcourse.wewell.SignInActivity;
 import edu.neu.madcourse.wewell.model.Activity;
 import edu.neu.madcourse.wewell.service.ActivityService;
-import edu.neu.madcourse.wewell.service.RewardService;
 
 public class HomeFragment extends Fragment {
 
@@ -41,11 +40,6 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private RviewAdapter rviewAdapter;
     private RecyclerView.LayoutManager rLayoutManger;
-    private RewardService rewardService;
-    private TextView textViewMiles;
-    private TextView textViewRuns;
-    private TextView avgDis;
-    private TextView avgPace;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -56,10 +50,6 @@ public class HomeFragment extends Fragment {
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String currentUserId = sharedPreferences.getString(getString(R.string.current_user_id), null);
 
-        TextView textView = (TextView) root.findViewById(R.id.textView);
-        String username = currentUserId;
-        textView.setText(username);
-
         Button signOutButton = (Button) root.findViewById(R.id.sign_out_button);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,35 +57,38 @@ public class HomeFragment extends Fragment {
                 signOut();
             }
         });
-        rewardService = new RewardService();
+
+        //new
+        TextView textView = (TextView) root.findViewById(R.id.textView);
+        String username = currentUserId;
+        textView.setText(username);
+
         init(true, false, currentUserId);
-        textViewMiles = (TextView) root.findViewById(R.id.textView2);
-        textViewRuns = (TextView) root.findViewById(R.id.textView3);
-        avgDis = (TextView) root.findViewById(R.id.textView5);
-        avgPace = (TextView) root.findViewById(R.id.textView11);
-        // To do: setText avgDis & avgPace
+//        getUserActivitiesButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+
         return root;
     }
 
+
     private void init(boolean shouldCreateRecycler, boolean shouldNotifyDataChange, String currentUserId) {
-        activityService.getActivitiesFromUser(activityList -> {
-            if (activityList != null) {
-                int totalrun = activityList.size();
-                String total = String.valueOf(totalrun);
-                textViewRuns.setText(total);
-                if (shouldCreateRecycler) {
-                    createRecycler(activityList);
-                }
-                if (shouldNotifyDataChange) {
-                    rviewAdapter.notifyDataSetChanged();
+        activityService.getActivitiesFromUser(new ActivityService.callBack() {
+            @Override
+            public void callBack(List<Activity> activityList) {
+                if (activityList != null) {
+                    if (shouldCreateRecycler) {
+                        createRecycler(activityList);
+                    }
+                    if (shouldNotifyDataChange) {
+                        rviewAdapter.notifyDataSetChanged();
+                    }
                 }
             }
         }, currentUserId);
-       rewardService.getTotalDistanceByUser(distance -> {
-            String formatDistance = String.format("%.2f", distance);
-           textViewMiles.setText(formatDistance);
-        }, currentUserId);
-
     }
 
     public void signOut() {

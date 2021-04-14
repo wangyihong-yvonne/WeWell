@@ -19,7 +19,6 @@ public class RviewAdapter extends RecyclerView.Adapter<RviewHolder> {
     private ItemClickListener listener;
     private Context context;
 
-
     public RviewAdapter(List<Activity> activityList, Context context) {
         this.activityList = activityList;
         this.context = context;
