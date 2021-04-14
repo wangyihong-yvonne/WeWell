@@ -26,6 +26,7 @@ import edu.neu.madcourse.wewell.R;
 import edu.neu.madcourse.wewell.SignInActivity;
 import edu.neu.madcourse.wewell.model.Activity;
 import edu.neu.madcourse.wewell.service.ActivityService;
+import edu.neu.madcourse.wewell.util.Util;
 
 public class HomeFragment extends Fragment {
 
@@ -40,7 +41,10 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private RviewAdapter rviewAdapter;
     private RecyclerView.LayoutManager rLayoutManger;
-
+    private TextView textTotalDistance = null;
+    private TextView textTotalRuns = null;
+    private TextView textAvgPace = null;
+    private TextView textAvgCalories = null;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +67,11 @@ public class HomeFragment extends Fragment {
         String username = currentUserId;
         textView.setText(username);
 
+        textTotalDistance = root.findViewById(R.id.et_total_dis);
+        textTotalRuns = root.findViewById(R.id.et_total_runs);
+        textAvgCalories = root.findViewById(R.id.et_avg_calorie);
+        textAvgPace = root.findViewById(R.id.et_avg_pace);
+
         init(true, false, currentUserId);
 //        getUserActivitiesButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -80,6 +89,26 @@ public class HomeFragment extends Fragment {
             @Override
             public void callBack(List<Activity> activityList) {
                 if (activityList != null) {
+                    int totalRun = activityList.size();
+                    int totalCalorie = 0;
+                    double totalDistance = 0;
+                    long totalPace = 0;
+                    for (Activity activity : activityList) {
+                        totalCalorie += activity.getCalories();
+                        totalDistance += activity.getDistance();
+                        totalPace += activity.getPace();
+                    }
+                    int avgCalorie = totalCalorie / totalRun;
+                    long avgPace = totalPace / totalRun;
+
+                    String formattedAvgPace = Util.formatTime(avgPace);
+                    String formattedAvgCalorie = String.valueOf(avgCalorie);
+                    String formattedTotalRuns = String.valueOf(totalRun);
+                    String formattedTotalDistance = String.format("%.2f", totalDistance);
+                    textTotalDistance.setText(formattedTotalDistance);
+                    textAvgCalories.setText(formattedAvgCalorie);
+                    textAvgPace.setText(formattedAvgPace);
+                    textTotalRuns.setText(formattedTotalRuns);
                     if (shouldCreateRecycler) {
                         createRecycler(activityList);
                     }
@@ -117,6 +146,5 @@ public class HomeFragment extends Fragment {
 //    public void refreshUserList(View view) {
 //        init(false, true, );
 //    }
-
 
 }
