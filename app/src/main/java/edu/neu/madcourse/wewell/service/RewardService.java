@@ -96,16 +96,8 @@ public class RewardService {
                                     if (username == null) {
                                         String email = user.getEmail();
                                         if (!email.isEmpty()) {
-                                            try {
-                                                int end = email.indexOf('@');
-                                                username = email.substring(0, end);
-                                                if (username.length() > 18) {
-                                                    username = email.substring(0, 18);
-                                                }
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                                username = "Unknown Runner";
-                                            }
+                                            int end = email.indexOf('@');
+                                            username = email.substring(0, Math.min(end, 18));
                                         } else {
                                             username = "Unknown Runner";
                                         }
