@@ -96,7 +96,7 @@ public class RewardsFragment extends Fragment {
             if (TotalD >= 2){
             imgView1.setImageResource(images[1]);
             }
-            if (TotalD < 3){
+            if (TotalD >= 3){
             imgView2.setImageResource(images[2]);
             }
         }, currentUserId);
