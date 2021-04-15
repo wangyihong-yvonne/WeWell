@@ -92,7 +92,17 @@ public class RewardService {
                                     }
                                     Leader newLeader = new Leader();
                                     newLeader.setId(user.getUid());
-                                    newLeader.setName(user.getUsername());
+                                    String username = user.getUsername();
+                                    if (username == null) {
+                                        String email = user.getEmail();
+                                        if (!email.isEmpty()) {
+                                            int end = email.indexOf('@');
+                                            username = email.substring(0, Math.min(end, 18));
+                                        } else {
+                                            username = "Unknown Runner";
+                                        }
+                                    }
+                                    newLeader.setName(username);
                                     newLeader.setDistance(total);
                                     leaders.add(newLeader);
                                 }
