@@ -49,7 +49,7 @@ public class ActivityService {
                                 .collection("totalDistance")
                                 .document("total").update("distance", newTotal)
                         .addOnSuccessListener(aVoid -> {
-                            callback.callBack(0);
+                            callback.callBack(currentDistance);
                         });
                     }
                 });
@@ -89,7 +89,7 @@ public class ActivityService {
     }
 
     public interface RefreshTotalCallback {
-        void callBack(int i);
+        void callBack(double curTotalDistance);
 
     }
 
