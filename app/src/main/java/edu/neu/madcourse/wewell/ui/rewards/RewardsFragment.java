@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,12 +20,21 @@ import edu.neu.madcourse.wewell.model.Leader;
 import edu.neu.madcourse.wewell.model.Reward;
 import edu.neu.madcourse.wewell.service.RewardService;
 
+
 public class RewardsFragment extends Fragment {
 
     // rewards
     private RecyclerView rewardsRecyclerView;
     private RviewAdapter rewardsRviewAdapter;
     private RecyclerView.LayoutManager rewardsRLayoutManger;
+
+    //badge
+    private ImageView imgView;
+    private ImageView imgView1;
+    private ImageView imgView2;
+    private int current_image;
+    int[] images ={R.drawable.onekk, R.drawable.twokk, R.drawable.threekk};
+
 
     // leaderboard
     private RecyclerView leaderboardRecyclerView;
@@ -44,6 +53,11 @@ public class RewardsFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String currentUserId = sharedPreferences.getString(getString(R.string.current_user_id), null);
+
+        imgView=root.findViewById(R.id.imageView4);
+        imgView1=root.findViewById(R.id.imageView6);
+        imgView2=root.findViewById(R.id.imageView7);
+
 
         rewardService = new RewardService();
         init(true, false, currentUserId);
@@ -72,6 +86,20 @@ public class RewardsFragment extends Fragment {
                 }
             }
         });
+
+        rewardService.getTotalDistanceByUser(distance -> {
+            String formatDistance = String.format("%.2f", distance);
+            Double TotalD = Double.valueOf(formatDistance);
+            if (TotalD >= 1){
+            imgView.setImageResource(images[0]);
+             }
+            if (TotalD >= 2){
+            imgView1.setImageResource(images[1]);
+            }
+            if (TotalD >= 3){
+            imgView2.setImageResource(images[2]);
+            }
+        }, currentUserId);
     }
 
     private void createRecycler(List<Reward> rewardList, List<Leader> leaderList) {
@@ -94,5 +122,6 @@ public class RewardsFragment extends Fragment {
         }
 
     }
+
 
 }
