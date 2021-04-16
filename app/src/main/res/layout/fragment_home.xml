@@ -52,7 +52,7 @@
             android:id="@+id/textView6"
             android:layout_width="180dp"
             android:layout_height="match_parent"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/roboto_medium"
             android:paddingTop="20dp"
             android:text="History"
             android:textAlignment="center"
