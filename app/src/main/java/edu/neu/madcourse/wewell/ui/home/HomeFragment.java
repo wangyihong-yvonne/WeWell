@@ -15,16 +15,34 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Cartesian;
+import com.anychart.core.Chart;
+import com.anychart.core.cartesian.series.Column;
+import com.anychart.core.cartesian.series.Line;
+import com.anychart.data.Mapping;
+import com.anychart.data.Set;
+import com.anychart.enums.Anchor;
+import com.anychart.enums.HoverMode;
+import com.anychart.enums.MarkerType;
+import com.anychart.enums.Position;
+import com.anychart.enums.TooltipPositionMode;
+import com.anychart.graphics.vector.Stroke;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import edu.neu.madcourse.wewell.R;
 import edu.neu.madcourse.wewell.SignInActivity;
 import edu.neu.madcourse.wewell.model.Activity;
+import edu.neu.madcourse.wewell.model.ActivitySummary;
 import edu.neu.madcourse.wewell.service.ActivityService;
 import edu.neu.madcourse.wewell.util.Util;
 
@@ -37,13 +55,17 @@ public class HomeFragment extends Fragment {
     }
 
     private ActivityService activityService;
+
     private RecyclerView recyclerView;
     private RviewAdapter rviewAdapter;
     private RecyclerView.LayoutManager rLayoutManger;
-    private TextView textTotalDistance = null;
-    private TextView textTotalRuns = null;
-    private TextView textAvgPace = null;
-    private TextView textAvgCalories = null;
+
+    private RecyclerView recyclerViewHorizontal;
+    private RecyclerView.LayoutManager rLayoutMangerHorizontal;
+    private ComplexRecyclerViewAdapter complexRecyclerViewAdapter;
+
+
+    private AnyChartView anyChartView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -66,19 +88,9 @@ public class HomeFragment extends Fragment {
         String username = currentUserId;
         textView.setText(username);
 
-        textTotalDistance = root.findViewById(R.id.et_total_dis);
-        textTotalRuns = root.findViewById(R.id.et_total_runs);
-        textAvgCalories = root.findViewById(R.id.et_avg_calorie);
-        textAvgPace = root.findViewById(R.id.et_avg_pace);
-
         init(true, false, currentUserId);
-//        getUserActivitiesButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
 
+        anyChartView = (AnyChartView) root.findViewById(R.id.any_chart_view);
         return root;
     }
 
@@ -104,12 +116,16 @@ public class HomeFragment extends Fragment {
                     String formattedAvgCalorie = String.valueOf(avgCalorie);
                     String formattedTotalRuns = String.valueOf(totalRun);
                     String formattedTotalDistance = String.format("%.2f", totalDistance);
-                    textTotalDistance.setText(formattedTotalDistance);
-                    textAvgCalories.setText(formattedAvgCalorie);
-                    textAvgPace.setText(formattedAvgPace);
-                    textTotalRuns.setText(formattedTotalRuns);
+                    ActivitySummary activitySummary = new ActivitySummary(formattedTotalDistance,
+                            formattedTotalRuns, formattedAvgPace, formattedAvgCalorie);
+
+                    List<Object> horizontalItemList = new ArrayList<>();
+                    Cartesian cartesian = initColCharts(activityList);
+                    horizontalItemList.add(activitySummary);
+                    horizontalItemList.add(cartesian);
                     if (shouldCreateRecycler) {
-                        createRecycler(activityList);
+                        createRecyclerVertical(activityList);
+                        createRecyclerHorizontal(horizontalItemList);
                     }
                     if (shouldNotifyDataChange) {
                         rviewAdapter.notifyDataSetChanged();
@@ -133,17 +149,59 @@ public class HomeFragment extends Fragment {
         // [END auth_fui_signout]
     }
 
-    private void createRecycler(List<Activity> activityList) {
+    private void createRecyclerVertical(List<Activity> activityList) {
         rLayoutManger = new LinearLayoutManager(getContext());
         recyclerView = getView().findViewById(R.id.user_activity_list_recycler);
         recyclerView.setHasFixedSize(true);
-        rviewAdapter = new RviewAdapter(activityList,getContext());
+        rviewAdapter = new RviewAdapter(activityList, getContext());
         recyclerView.setAdapter(rviewAdapter);
         recyclerView.setLayoutManager(rLayoutManger);
     }
 
-//    public void refreshUserList(View view) {
-//        init(false, true, );
-//    }
+    //TODO
+    private void createRecyclerHorizontal(List<Object> itemList) {
+        rLayoutMangerHorizontal = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewHorizontal = getView().findViewById(R.id.user_activity_horizontal_recycler);
+        recyclerViewHorizontal.setHasFixedSize(true);
+        complexRecyclerViewAdapter = new ComplexRecyclerViewAdapter(itemList);
+        recyclerViewHorizontal.setAdapter(complexRecyclerViewAdapter);
+        recyclerViewHorizontal.setLayoutManager(rLayoutMangerHorizontal);
+    }
+
+    private Cartesian initColCharts(List<Activity> activityList) {
+        Cartesian cartesian = AnyChart.column();
+
+        List<DataEntry> data = new ArrayList<>();
+        for (Activity activity : activityList) {
+            String date = Util.formatDateV2(activity.getStartTime());
+            double distance = activity.getDistance();
+            data.add(new ValueDataEntry(date, distance));
+        }
+        Column column = cartesian.column(data);
+
+        column.tooltip()
+                .titleFormat("{%X}")
+                .position(Position.CENTER_BOTTOM)
+                .anchor(Anchor.CENTER_BOTTOM)
+                .offsetX(0d)
+                .offsetY(2d)
+                .format("{%Value}{groupsSeparator: }");
+
+        cartesian.animation(true);
+        cartesian.yScale().minimum(0d);
+        cartesian.yScale().maximum(20d);
+        cartesian.yAxis(0).labels().format("{%Value}{groupsSeparator: }");
+        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
+        cartesian.interactivity().hoverMode(HoverMode.BY_X);
+        cartesian.yAxis(0).title("Distance (KM)");
+        cartesian.xScroller(true);
+//        cartesian.xScroller().thumbs().autoHide(true);
+//        cartesian.xScroller().thumbs().hovered("#FFD700");
+        cartesian.xScroller().allowRangeChange(false);
+//        cartesian.xZoom().setToPointsCount(10,true, )
+//        anyChartView.setChart(cartesian);
+        return cartesian;
+    }
+
 
 }
