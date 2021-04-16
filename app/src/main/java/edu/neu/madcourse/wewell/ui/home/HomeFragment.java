@@ -119,10 +119,10 @@ public class HomeFragment extends Fragment {
                     ActivitySummary activitySummary = new ActivitySummary(formattedTotalDistance,
                             formattedTotalRuns, formattedAvgPace, formattedAvgCalorie);
 
-                    List<Object> horizontalItemList = new ArrayList<>();
-                    Cartesian cartesian = initColCharts(activityList);
-                    horizontalItemList.add(activitySummary);
-                    horizontalItemList.add(cartesian);
+                    List<RecyclerItem> horizontalItemList = new ArrayList<>();
+//                    Cartesian cartesian = initColCharts(activityList);
+                    horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Summary, activitySummary));
+                    horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Chart, activityList));
                     if (shouldCreateRecycler) {
                         createRecyclerVertical(activityList);
                         createRecyclerHorizontal(horizontalItemList);
@@ -159,7 +159,7 @@ public class HomeFragment extends Fragment {
     }
 
     //TODO
-    private void createRecyclerHorizontal(List<Object> itemList) {
+    private void createRecyclerHorizontal(List<RecyclerItem> itemList) {
         rLayoutMangerHorizontal = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewHorizontal = getView().findViewById(R.id.user_activity_horizontal_recycler);
         recyclerViewHorizontal.setHasFixedSize(true);
@@ -167,41 +167,4 @@ public class HomeFragment extends Fragment {
         recyclerViewHorizontal.setAdapter(complexRecyclerViewAdapter);
         recyclerViewHorizontal.setLayoutManager(rLayoutMangerHorizontal);
     }
-
-    private Cartesian initColCharts(List<Activity> activityList) {
-        Cartesian cartesian = AnyChart.column();
-
-        List<DataEntry> data = new ArrayList<>();
-        for (Activity activity : activityList) {
-            String date = Util.formatDateV2(activity.getStartTime());
-            double distance = activity.getDistance();
-            data.add(new ValueDataEntry(date, distance));
-        }
-        Column column = cartesian.column(data);
-
-        column.tooltip()
-                .titleFormat("{%X}")
-                .position(Position.CENTER_BOTTOM)
-                .anchor(Anchor.CENTER_BOTTOM)
-                .offsetX(0d)
-                .offsetY(2d)
-                .format("{%Value}{groupsSeparator: }");
-
-        cartesian.animation(true);
-        cartesian.yScale().minimum(0d);
-        cartesian.yScale().maximum(20d);
-        cartesian.yAxis(0).labels().format("{%Value}{groupsSeparator: }");
-        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
-        cartesian.interactivity().hoverMode(HoverMode.BY_X);
-        cartesian.yAxis(0).title("Distance (KM)");
-        cartesian.xScroller(true);
-//        cartesian.xScroller().thumbs().autoHide(true);
-//        cartesian.xScroller().thumbs().hovered("#FFD700");
-        cartesian.xScroller().allowRangeChange(false);
-//        cartesian.xZoom().setToPointsCount(10,true, )
-//        anyChartView.setChart(cartesian);
-        return cartesian;
-    }
-
-
 }
