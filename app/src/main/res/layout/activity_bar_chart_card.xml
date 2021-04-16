@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_bar_chart_card"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barchart"
+        android:layout_width="match_parent"
+        android:layout_height="193dp" />
+</com.google.android.material.card.MaterialCardView>

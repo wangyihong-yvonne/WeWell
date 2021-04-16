@@ -13,17 +13,23 @@ import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Cartesian;
 import com.anychart.core.cartesian.series.Column;
+import com.anychart.core.cartesian.series.Line;
 import com.anychart.enums.Anchor;
 import com.anychart.enums.HoverMode;
 import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.neu.madcourse.wewell.R;
 import edu.neu.madcourse.wewell.model.Activity;
-import edu.neu.madcourse.wewell.model.ActivityChart;
 import edu.neu.madcourse.wewell.model.ActivitySummary;
 import edu.neu.madcourse.wewell.util.Util;
 
@@ -33,7 +39,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     // The items to display in your RecyclerView
     private List<RecyclerItem> items;
 
-    public static final int Summary = 0, Chart = 1;
+    public static final int Summary = 0, Bar_Chart = 1, Line_Char = 2;
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public ComplexRecyclerViewAdapter(List<RecyclerItem> items) {
@@ -61,27 +67,33 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        if (viewType == Chart) {
-            View v1 = inflater.inflate(R.layout.activity_chart_card, parent, false);
-            viewHolder = new ActivityChartRviewHolder(v1);
+        if (viewType == Bar_Chart) {
+
+            View v1 = inflater.inflate(R.layout.activity_bar_chart_card, parent, false);
+            viewHolder = new ActivityChartRviewHolder(v1, Bar_Chart);
+        } else if (viewType == Line_Char) {
+            View v2 = inflater.inflate(R.layout.activity_line_chart_card, parent, false);
+            viewHolder = new ActivityChartRviewHolder(v2, Line_Char);
         } else if (viewType == Summary) {
-            View v2 = inflater.inflate(R.layout.activity_summary_card, parent, false);
-            viewHolder = new ActivitySummaryRviewHolder(v2);
+            View v3 = inflater.inflate(R.layout.activity_summary_card, parent, false);
+            viewHolder = new ActivitySummaryRviewHolder(v3);
         }
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-        if (viewHolder.getItemViewType() == Chart) {
+        if (viewHolder.getItemViewType() == Bar_Chart) {
             ActivityChartRviewHolder vh1 = (ActivityChartRviewHolder) viewHolder;
             configureViewHolderforCharts(vh1, position);
+        } else if (viewHolder.getItemViewType() == Line_Char) {
+            ActivityChartRviewHolder vh2 = (ActivityChartRviewHolder) viewHolder;
+            configureViewHolderforCharts(vh2, position);
         } else if (viewHolder.getItemViewType() == Summary) {
             ActivitySummaryRviewHolder vh = (ActivitySummaryRviewHolder) viewHolder;
             configureViewHolderforSummary(vh, position);
         }
     }
-
 
     private void configureViewHolderforSummary(ActivitySummaryRviewHolder vh, int position) {
         ActivitySummary summary = (ActivitySummary) items.get(position).getObject();
@@ -93,47 +105,49 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         }
     }
 
-    //TODO
+
     private void configureViewHolderforCharts(ActivityChartRviewHolder vh, int position) {
         List<Activity> activityList = (List<Activity>) items.get(position).getObject();
         if (activityList != null) {
-            AnyChartView anyChartView = vh.getAnyChartView();
-            Cartesian cartesian = initColCharts(activityList);
-            anyChartView.setChart(cartesian);
+            if (vh.getCharType() == Bar_Chart) {
+                BarChart barChart = (BarChart) vh.getChart();
+                initBarCharts(barChart, activityList);
+            }else if (vh.getCharType() == Line_Char) {
+                LineChart lineChart = (LineChart) vh.getChart();
+                initLineCharts(lineChart, activityList);
+            }
         }
     }
 
-    private Cartesian initColCharts(List<Activity> activityList) {
-        Cartesian cartesian = AnyChart.column();
 
-        List<DataEntry> data = new ArrayList<>();
+    private void initBarCharts(BarChart barChart, List<Activity> activityList) {
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+        float idx = 0;
+        for (Activity activity : activityList) {
+            double distance = activity.getDistance();
+            barEntries.add(new BarEntry(idx, (float) distance));
+            idx++;
+        }
+
+        BarDataSet barDataSet = new BarDataSet(barEntries, "Distance");
+        ArrayList<String> theDates = new ArrayList<>();
         for (Activity activity : activityList) {
             String date = Util.formatDateV2(activity.getStartTime());
-            double distance = activity.getDistance();
-            data.add(new ValueDataEntry(date, distance));
+            theDates.add(date);
         }
-        Column column = cartesian.column(data);
 
-        column.tooltip()
-                .titleFormat("{%X}")
-                .position(Position.CENTER_BOTTOM)
-                .anchor(Anchor.CENTER_BOTTOM)
-                .offsetX(0d)
-                .offsetY(2d)
-                .format("{%Value}{groupsSeparator: }");
-
-        cartesian.animation(true);
-        cartesian.yScale().minimum(0d);
-        cartesian.yScale().maximum(20d);
-        cartesian.yAxis(0).labels().format("{%Value}{groupsSeparator: }");
-        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
-        cartesian.interactivity().hoverMode(HoverMode.BY_X);
-        cartesian.yAxis(0).title("Distance (KM)");
-        cartesian.xScroller(true);
-        cartesian.xScroller().allowRangeChange(false);
-        return cartesian;
+        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(theDates));
+        BarData theData = new BarData(barDataSet);
+        barChart.setData(theData);
+        barChart.setTouchEnabled(true);
+        barChart.setDragEnabled(true);
+        barChart.setScaleEnabled(true);
+        barChart.setVisibleXRangeMaximum(6);
     }
 
+    private void initLineCharts(LineChart lineChart, List<Activity> activityList) {
+
+    }
 //    private void bindDataToAdapter() {
 //        // Bind adapter to recycler view object
 //        recyclerView.setAdapter(new ComplexRecyclerViewAdapter(getSampleArrayList()));
