@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,26 +17,12 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
-import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.anychart.charts.Cartesian;
-import com.anychart.core.Chart;
-import com.anychart.core.cartesian.series.Column;
-import com.anychart.core.cartesian.series.Line;
-import com.anychart.data.Mapping;
-import com.anychart.data.Set;
-import com.anychart.enums.Anchor;
-import com.anychart.enums.HoverMode;
-import com.anychart.enums.MarkerType;
-import com.anychart.enums.Position;
-import com.anychart.enums.TooltipPositionMode;
-import com.anychart.graphics.vector.Stroke;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.neu.madcourse.wewell.R;
@@ -49,7 +35,6 @@ import edu.neu.madcourse.wewell.util.Util;
 public class HomeFragment extends Fragment {
 
     private Context context;
-
 
     public HomeFragment() {
         // Required empty public constructor
@@ -68,7 +53,6 @@ public class HomeFragment extends Fragment {
 
     private AnyChartView anyChartView;
 
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -77,8 +61,7 @@ public class HomeFragment extends Fragment {
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String currentUserId = sharedPreferences.getString(getString(R.string.current_user_id), null);
 
-        ImageButton signOutButton = root.findViewById(R.id.imageButton2);
-
+        Button signOutButton = (Button) root.findViewById(R.id.sign_out_button);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
