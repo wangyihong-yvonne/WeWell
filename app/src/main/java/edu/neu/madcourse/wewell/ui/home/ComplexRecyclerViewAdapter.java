@@ -130,11 +130,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         cartesian.interactivity().hoverMode(HoverMode.BY_X);
         cartesian.yAxis(0).title("Distance (KM)");
         cartesian.xScroller(true);
-//        cartesian.xScroller().thumbs().autoHide(true);
-//        cartesian.xScroller().thumbs().hovered("#FFD700");
         cartesian.xScroller().allowRangeChange(false);
-//        cartesian.xZoom().setToPointsCount(10,true, )
-//        anyChartView.setChart(cartesian);
         return cartesian;
     }
 

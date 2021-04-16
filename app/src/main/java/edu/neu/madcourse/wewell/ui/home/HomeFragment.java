@@ -13,7 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
@@ -120,7 +122,6 @@ public class HomeFragment extends Fragment {
                             formattedTotalRuns, formattedAvgPace, formattedAvgCalorie);
 
                     List<RecyclerItem> horizontalItemList = new ArrayList<>();
-//                    Cartesian cartesian = initColCharts(activityList);
                     horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Summary, activitySummary));
                     horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Chart, activityList));
                     if (shouldCreateRecycler) {
@@ -158,7 +159,6 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(rLayoutManger);
     }
 
-    //TODO
     private void createRecyclerHorizontal(List<RecyclerItem> itemList) {
         rLayoutMangerHorizontal = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewHorizontal = getView().findViewById(R.id.user_activity_horizontal_recycler);
@@ -166,5 +166,7 @@ public class HomeFragment extends Fragment {
         complexRecyclerViewAdapter = new ComplexRecyclerViewAdapter(itemList);
         recyclerViewHorizontal.setAdapter(complexRecyclerViewAdapter);
         recyclerViewHorizontal.setLayoutManager(rLayoutMangerHorizontal);
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerViewHorizontal);
     }
 }
