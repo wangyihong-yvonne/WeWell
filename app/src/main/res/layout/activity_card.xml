@@ -37,7 +37,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:backgroundTint="@color/white"
-                android:tint="@color/purple_700"
+                android:src="@drawable/ic_icon_artwork"
+                android:tint="@color/black"
                 app:srcCompat="@android:drawable/ic_menu_share" />
         </LinearLayout>
 
@@ -52,23 +53,15 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/distance"
-                    android:layout_width="77dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="@string/distance"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
                     android:id="@+id/distance_val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/distance"
                     android:layout_marginLeft="10dp"
                     android:layout_toEndOf="@id/distance"
-                    android:text="@string/distance_val" />
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/distance_val"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <LinearLayout
@@ -77,19 +70,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/Pace"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pace"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
                     android:id="@+id/pace_val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="pace_val" />
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="pace_val"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <LinearLayout
@@ -98,20 +84,13 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/calorie"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/calorie"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
                     android:id="@+id/calorie_val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="calorie_val"
-                    android:textAlignment="textStart" />
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <LinearLayout
@@ -120,19 +99,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/time"
-                    android:layout_width="51dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/time"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
                     android:id="@+id/time_val"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="time_val" />
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="time_val"
+                    android:textColor="@color/black" />
             </LinearLayout>
         </LinearLayout>
 
