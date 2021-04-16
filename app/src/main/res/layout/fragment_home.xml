@@ -114,7 +114,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/user_activity_list_recycler"
             android:layout_width="match_parent"
-            android:layout_height="527dp"
+            android:layout_height="249dp"
             android:layout_marginTop="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -122,4 +122,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
     </LinearLayout>
+
+    <com.anychart.AnyChartView
+        android:id="@+id/any_chart_view"
+        android:layout_width="match_parent"
+        android:layout_height="193dp" />
 </LinearLayout>

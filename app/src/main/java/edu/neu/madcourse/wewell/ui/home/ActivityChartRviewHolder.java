@@ -22,7 +22,8 @@ public class ActivityChartRviewHolder extends RecyclerView.ViewHolder {
         return anyChartView;
     }
 
-    public void setAnyChartView(AnyChartView anyChartView) {
+        public void setAnyChartView(AnyChartView anyChartView) {
         this.anyChartView = anyChartView;
     }
+
 }
