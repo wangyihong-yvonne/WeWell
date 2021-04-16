@@ -19,10 +19,11 @@
             android:id="@+id/et_total_dis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
             android:text="0.00"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="40sp" />
+            android:textSize="48sp" />
 
         <TextView
             android:id="@+id/TotalKMs"
@@ -30,10 +31,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="25dp"
+            android:fontFamily="@font/roboto_medium"
             android:text="Total KMs"
             android:textAlignment="center"
-            android:textColor="#6A6767"
-            android:textSize="18sp" />
+            android:textColor="@color/black"
+            android:textSize="10sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,10 +51,11 @@
                     android:id="@+id/et_total_runs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/textView15"
@@ -62,8 +65,8 @@
                     android:layout_marginBottom="5dp"
                     android:text="Total Runs"
                     android:textAlignment="center"
-                    android:textColor="#6A6767"
-                    android:textSize="18sp" />
+                    android:textColor="@color/black"
+                    android:textSize="10sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -75,10 +78,11 @@
                     android:id="@+id/et_avg_calorie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/textView17"
@@ -88,8 +92,8 @@
                     android:layout_marginBottom="5dp"
                     android:text="Avg. Calorie"
                     android:textAlignment="center"
-                    android:textColor="#6A6767"
-                    android:textSize="18sp" />
+                    android:textColor="@color/black"
+                    android:textSize="10sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -101,10 +105,11 @@
                     android:id="@+id/et_avg_pace"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="0'00''"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/textView18"
@@ -114,8 +119,8 @@
                     android:layout_marginBottom="5dp"
                     android:text="Avg. Pace"
                     android:textAlignment="center"
-                    android:textColor="#6A6767"
-                    android:textSize="18sp" />
+                    android:textColor="@color/black"
+                    android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
