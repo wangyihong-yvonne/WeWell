@@ -37,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/white"
                 android:backgroundTint="@color/white"
-                android:tint="@color/black"
+                android:tint="#1F1E20"
                 app:srcCompat="@drawable/ic_icon_artwork" />
         </LinearLayout>
 
