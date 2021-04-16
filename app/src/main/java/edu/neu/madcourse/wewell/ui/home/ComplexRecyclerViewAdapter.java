@@ -80,11 +80,10 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
     //TODO
     private void configureViewHolderforCharts(ActivityChartRviewHolder vh, int position) {
-//        ActivityChart chart = (ActivityChart) items.get(position);
-//        if (chart != null) {
-//            vh.getLabel1().setText("Name: " + user.name);
-//            vh1.getLabel2().setText("Hometown: " + user.hometown);
-//        }
+        ActivityChart chart = (ActivityChart) items.get(position);
+        if (chart != null) {
+//            vh.setAnyChartView()
+        }
     }
 
 //    private void bindDataToAdapter() {

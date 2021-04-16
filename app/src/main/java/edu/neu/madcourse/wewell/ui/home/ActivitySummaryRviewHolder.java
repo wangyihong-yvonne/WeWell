@@ -21,7 +21,6 @@ public class ActivitySummaryRviewHolder extends RecyclerView.ViewHolder {
         textTotalRuns = itemView.findViewById(R.id.et_total_runs);
         textAvgCalories = itemView.findViewById(R.id.et_avg_calorie);
         textAvgPace = itemView.findViewById(R.id.et_avg_pace);
-
     }
 
 }

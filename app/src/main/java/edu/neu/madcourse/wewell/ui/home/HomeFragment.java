@@ -197,9 +197,9 @@ public class HomeFragment extends Fragment {
         cartesian.xScroller(true);
 //        cartesian.xScroller().thumbs().autoHide(true);
 //        cartesian.xScroller().thumbs().hovered("#FFD700");
-        cartesian.xScroller().allowRangeChange(false);
+
 //        cartesian.xZoom().setToPointsCount(10,true, )
-//        anyChartView.setChart(cartesian);
+        anyChartView.setChart(cartesian);
         return cartesian;
     }
 
