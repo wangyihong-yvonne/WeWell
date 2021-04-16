@@ -31,6 +31,7 @@ import edu.neu.madcourse.wewell.model.Activity;
 import edu.neu.madcourse.wewell.model.ActivitySummary;
 import edu.neu.madcourse.wewell.service.ActivityService;
 import edu.neu.madcourse.wewell.util.Util;
+import ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator;
 
 public class HomeFragment extends Fragment {
 
@@ -108,6 +109,10 @@ public class HomeFragment extends Fragment {
                     List<RecyclerItem> horizontalItemList = new ArrayList<>();
                     horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Summary, activitySummary));
                     horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Chart, activityList));
+                    horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Chart, activityList));
+                    horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Chart, activityList));
+                    horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Chart, activityList));
+
                     if (shouldCreateRecycler) {
                         createRecyclerVertical(activityList);
                         createRecyclerHorizontal(horizontalItemList);
@@ -152,5 +157,7 @@ public class HomeFragment extends Fragment {
         recyclerViewHorizontal.setLayoutManager(rLayoutMangerHorizontal);
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerViewHorizontal);
+        ScrollingPagerIndicator recyclerIndicator = getView().findViewById(R.id.indicator);
+        recyclerIndicator.attachToRecyclerView(recyclerViewHorizontal);
     }
 }
