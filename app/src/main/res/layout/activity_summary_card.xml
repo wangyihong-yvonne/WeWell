@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="193dp"
+        android:layout_marginTop="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/user_activity_list_recycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView6">
+
+        <TextView
+            android:id="@+id/et_total_dis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0.00"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/TotalKMs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="25dp"
+            android:text="Total KMs"
+            android:textAlignment="center"
+            android:textColor="#6A6767"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="125dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/et_total_runs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Total Runs"
+                    android:textAlignment="center"
+                    android:textColor="#6A6767"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="137dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/et_avg_calorie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Avg. Calorie"
+                    android:textAlignment="center"
+                    android:textColor="#6A6767"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/et_avg_pace"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0'00''"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Avg. Pace"
+                    android:textAlignment="center"
+                    android:textColor="#6A6767"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

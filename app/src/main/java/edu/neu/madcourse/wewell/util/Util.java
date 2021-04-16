@@ -20,6 +20,12 @@ public class Util {
         return formattedDate;
     }
 
+    public static String formatDateV2(long date) {
+        Date d = new Date(date);
+        Format format = new SimpleDateFormat("MM-dd HH:mm");
+        String formattedDate = format.format(d);
+        return formattedDate;
+    }
 
 
 
