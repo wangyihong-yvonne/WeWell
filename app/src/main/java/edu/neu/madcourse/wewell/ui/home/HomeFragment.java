@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,8 +37,6 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import edu.neu.madcourse.wewell.R;
@@ -51,6 +49,7 @@ import edu.neu.madcourse.wewell.util.Util;
 public class HomeFragment extends Fragment {
 
     private Context context;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -69,6 +68,7 @@ public class HomeFragment extends Fragment {
 
     private AnyChartView anyChartView;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -77,7 +77,8 @@ public class HomeFragment extends Fragment {
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String currentUserId = sharedPreferences.getString(getString(R.string.current_user_id), null);
 
-        Button signOutButton = (Button) root.findViewById(R.id.sign_out_button);
+        ImageButton signOutButton = root.findViewById(R.id.imageButton2);
+
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
