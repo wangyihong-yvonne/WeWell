@@ -54,7 +54,7 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/roboto_medium"
             android:paddingTop="20dp"
-            android:text="History"
+            android:text="Activity History"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/black"
@@ -120,7 +120,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/user_activity_list_recycler"
             android:layout_width="match_parent"
-            android:layout_height="496dp"
+            android:layout_height="529dp"
             android:layout_marginTop="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

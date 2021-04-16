@@ -17,8 +17,14 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
-import com.anychart.AnyChartView;
 import com.firebase.ui.auth.AuthUI;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -51,9 +57,6 @@ public class HomeFragment extends Fragment {
     private RecyclerView.LayoutManager rLayoutMangerHorizontal;
     private ComplexRecyclerViewAdapter complexRecyclerViewAdapter;
 
-
-    private AnyChartView anyChartView;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -77,7 +80,6 @@ public class HomeFragment extends Fragment {
 
         init(true, false, currentUserId);
 
-        anyChartView = (AnyChartView) root.findViewById(R.id.any_chart_view);
         return root;
     }
 
@@ -108,10 +110,8 @@ public class HomeFragment extends Fragment {
 
                     List<RecyclerItem> horizontalItemList = new ArrayList<>();
                     horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Summary, activitySummary));
-                    horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Chart, activityList));
-                    horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Chart, activityList));
-                    horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Chart, activityList));
-                    horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Chart, activityList));
+                    horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Bar_Chart, activityList));
+
 
                     if (shouldCreateRecycler) {
                         createRecyclerVertical(activityList);
@@ -159,5 +159,32 @@ public class HomeFragment extends Fragment {
         snapHelper.attachToRecyclerView(recyclerViewHorizontal);
         ScrollingPagerIndicator recyclerIndicator = getView().findViewById(R.id.indicator);
         recyclerIndicator.attachToRecyclerView(recyclerViewHorizontal);
+
+//        BarChart barChart = (BarChart) getView().findViewById(R.id.barchart);
+//
+//        ArrayList<BarEntry> barEntries = new ArrayList<>();
+//        barEntries.add(new BarEntry(0f, 44f));
+//        barEntries.add(new BarEntry(1f, 88f));
+//        barEntries.add(new BarEntry(2f, 41f));
+//        barEntries.add(new BarEntry(3f, 85f));
+//        barEntries.add(new BarEntry(4f, 96f));
+//        barEntries.add(new BarEntry(5f, 25f));
+//        barEntries.add(new BarEntry(6f, 10f));
+//        BarDataSet barDataSet = new BarDataSet(barEntries, "Dates");
+//        ArrayList<String> theDates = new ArrayList<>();
+//        theDates.add("Mars");
+//        theDates.add("Avril");
+//        theDates.add("Dec");
+//        theDates.add("May");
+//        theDates.add("OCt");
+//        theDates.add("Nov");
+//        theDates.add("Fir");
+//        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(theDates));
+//        BarData theData = new BarData(barDataSet);//----Line of error
+//        barChart.setData(theData);
+//        barChart.setTouchEnabled(true);
+//        barChart.setDragEnabled(true);
+//        barChart.setScaleEnabled(true);
+//        barChart.setVisibleXRangeMaximum(4);
     }
 }

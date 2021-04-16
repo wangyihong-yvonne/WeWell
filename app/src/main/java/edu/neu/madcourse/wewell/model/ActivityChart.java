@@ -1,15 +1,14 @@
 package edu.neu.madcourse.wewell.model;
 
-import com.anychart.AnyChart;
-import com.anychart.AnyChartView;
-import com.anychart.charts.Cartesian;
+
+import com.github.mikephil.charting.charts.Chart;
 
 public class ActivityChart {
 
-    AnyChartView anyChartView;
+    Chart chart;
 
-    public ActivityChart(AnyChartView anyChartView) {
-        this.anyChartView = anyChartView;
+    public ActivityChart(Chart chart) {
+        this.chart = chart;
     }
 
 

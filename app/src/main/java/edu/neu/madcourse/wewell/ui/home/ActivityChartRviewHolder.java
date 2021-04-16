@@ -1,29 +1,41 @@
 package edu.neu.madcourse.wewell.ui.home;
 
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.anychart.AnyChartView;
+import com.github.mikephil.charting.charts.Chart;
 
 import edu.neu.madcourse.wewell.R;
 
-
 public class ActivityChartRviewHolder extends RecyclerView.ViewHolder {
-    AnyChartView anyChartView;
+    private Chart chart;
+    private int charType;
 
-    public ActivityChartRviewHolder(View itemView) {
+    public ActivityChartRviewHolder(View itemView, int type) {
         super(itemView);
-        anyChartView = itemView.findViewById(R.id.any_chart_view);
+        if (type == ComplexRecyclerViewAdapter.Bar_Chart) {
+            chart = itemView.findViewById(R.id.barchart);
+            charType = type;
+        } else if (type == ComplexRecyclerViewAdapter.Line_Char) {
+            chart = itemView.findViewById(R.id.linechart);
+            charType = type;
+        }
     }
 
-    public AnyChartView getAnyChartView() {
-        return anyChartView;
+    public Chart getChart() {
+        return chart;
     }
 
-        public void setAnyChartView(AnyChartView anyChartView) {
-        this.anyChartView = anyChartView;
+    public void setChart(Chart chart) {
+        this.chart = chart;
     }
 
+    public int getCharType() {
+        return charType;
+    }
+
+    public void setCharType(int charType) {
+        this.charType = charType;
+    }
 }
