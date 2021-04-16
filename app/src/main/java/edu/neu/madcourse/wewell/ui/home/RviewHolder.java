@@ -26,7 +26,6 @@ public class RviewHolder extends RecyclerView.ViewHolder {
         time_value = itemView.findViewById(R.id.time_val);
         imageButton = itemView.findViewById(R.id.imageButton);
 
-
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
