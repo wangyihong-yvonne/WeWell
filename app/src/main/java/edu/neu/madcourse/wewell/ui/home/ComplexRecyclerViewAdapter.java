@@ -44,7 +44,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     // The items to display in your RecyclerView
     private List<RecyclerItem> items;
 
-    public static final int Summary = 0, Bar_Chart = 1, Line_Char = 2;
+    public static final int Summary = 0, Distance_Bar_Chart = 1, Calorie_Bar_Chart = 2, Pace_Line_Char = 3;
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public ComplexRecyclerViewAdapter(List<RecyclerItem> items) {
@@ -72,30 +72,36 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        if (viewType == Bar_Chart) {
+        if (viewType == Distance_Bar_Chart) {
             View v1 = inflater.inflate(R.layout.activity_bar_chart_card, parent, false);
-            viewHolder = new ActivityChartRviewHolder(v1, Bar_Chart);
-        } else if (viewType == Line_Char) {
-            View v2 = inflater.inflate(R.layout.activity_line_chart_card, parent, false);
-            viewHolder = new ActivityChartRviewHolder(v2, Line_Char);
+            viewHolder = new ActivityChartRviewHolder(v1, Distance_Bar_Chart);
+        } else if (viewType == Calorie_Bar_Chart) {
+            View v2 = inflater.inflate(R.layout.activity_bar_chart_card, parent, false);
+            viewHolder = new ActivityChartRviewHolder(v2, Calorie_Bar_Chart);
+        } else if (viewType == Pace_Line_Char) {
+            View v3 = inflater.inflate(R.layout.activity_line_chart_card, parent, false);
+            viewHolder = new ActivityChartRviewHolder(v3, Pace_Line_Char);
         } else if (viewType == Summary) {
-            View v3 = inflater.inflate(R.layout.activity_summary_card, parent, false);
-            viewHolder = new ActivitySummaryRviewHolder(v3);
+            View v4 = inflater.inflate(R.layout.activity_summary_card, parent, false);
+            viewHolder = new ActivitySummaryRviewHolder(v4);
         }
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-        if (viewHolder.getItemViewType() == Bar_Chart) {
+        if (viewHolder.getItemViewType() == Distance_Bar_Chart) {
             ActivityChartRviewHolder vh1 = (ActivityChartRviewHolder) viewHolder;
             configureViewHolderforCharts(vh1, position);
-        } else if (viewHolder.getItemViewType() == Line_Char) {
+        } else  if (viewHolder.getItemViewType() == Calorie_Bar_Chart) {
             ActivityChartRviewHolder vh2 = (ActivityChartRviewHolder) viewHolder;
             configureViewHolderforCharts(vh2, position);
+        } else if (viewHolder.getItemViewType() == Pace_Line_Char) {
+            ActivityChartRviewHolder vh3 = (ActivityChartRviewHolder) viewHolder;
+            configureViewHolderforCharts(vh3, position);
         } else if (viewHolder.getItemViewType() == Summary) {
-            ActivitySummaryRviewHolder vh = (ActivitySummaryRviewHolder) viewHolder;
-            configureViewHolderforSummary(vh, position);
+            ActivitySummaryRviewHolder vh4 = (ActivitySummaryRviewHolder) viewHolder;
+            configureViewHolderforSummary(vh4, position);
         }
     }
 
@@ -109,22 +115,63 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         }
     }
 
-
     private void configureViewHolderforCharts(ActivityChartRviewHolder vh, int position) {
         List<Activity> activityList = (List<Activity>) items.get(position).getObject();
         if (activityList != null) {
-            if (vh.getCharType() == Bar_Chart) {
+            if (vh.getCharType() == Distance_Bar_Chart) {
                 BarChart barChart = (BarChart) vh.getChart();
-                initBarCharts(barChart, activityList);
-            }else if (vh.getCharType() == Line_Char) {
+                initDistanceBarChart(barChart, activityList);
+            } else if (vh.getCharType() == Calorie_Bar_Chart) {
+                BarChart barChart = (BarChart) vh.getChart();
+                initCalorieBarChart(barChart, activityList);
+            } else if (vh.getCharType() == Pace_Line_Char) {
                 LineChart lineChart = (LineChart) vh.getChart();
-                initLineCharts(lineChart, activityList);
+                initPaceLineChart(lineChart, activityList);
             }
         }
     }
 
+    private void initPaceLineChart(LineChart lineChart, List<Activity> activityList) {
 
-    private void initBarCharts(BarChart barChart, List<Activity> activityList) {
+    }
+
+
+    private void initCalorieBarChart(BarChart barChart, List<Activity> activityList) {
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+        float idx = 0;
+        for (Activity activity : activityList) {
+            double calorie = activity.getCalories();
+            barEntries.add(new BarEntry(idx, (float) calorie));
+            idx++;
+        }
+        BarDataSet barDataSet = new BarDataSet(barEntries, "Calorie");
+        barDataSet.setValueTextSize(9);
+        barDataSet.setColor(Color.BLACK);
+        ArrayList<String> theDates = new ArrayList<>();
+        for (Activity activity : activityList) {
+            String date = Util.formatDateV2(activity.getStartTime());
+            theDates.add(date);
+        }
+        barChart.getDescription().setText("");
+        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(theDates));
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        barChart.getXAxis().setDrawGridLines(false);
+//        barChart.setViewPortOffsets(5,10,5,0);
+        barChart.getAxisRight().setEnabled(false);
+        barChart.getAxisLeft().setEnabled(false);
+//        barChart.getLegend().setEnabled(false);
+        BarData theData = new BarData(barDataSet);
+        theData.setBarWidth(0.5f);
+        barChart.setData(theData);
+        barChart.setTouchEnabled(true);
+        barChart.setDragEnabled(true);
+        barChart.setScaleEnabled(true);
+        barChart.setVisibleXRangeMaximum(7);
+        barChart.animateY(1000);
+    }
+
+    private void initDistanceBarChart(BarChart barChart, List<Activity> activityList) {
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         float idx = 0;
         for (Activity activity : activityList) {

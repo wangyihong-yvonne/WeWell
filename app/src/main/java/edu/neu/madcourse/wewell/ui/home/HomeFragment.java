@@ -110,8 +110,8 @@ public class HomeFragment extends Fragment {
 
                     List<RecyclerItem> horizontalItemList = new ArrayList<>();
                     horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Summary, activitySummary));
-                    horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Bar_Chart, activityList));
-
+                    horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Distance_Bar_Chart, activityList));
+                    horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Calorie_Bar_Chart, activityList));
 
                     if (shouldCreateRecycler) {
                         createRecyclerVertical(activityList);

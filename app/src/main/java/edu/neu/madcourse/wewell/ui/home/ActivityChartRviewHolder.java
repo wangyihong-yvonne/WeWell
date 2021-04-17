@@ -14,10 +14,13 @@ public class ActivityChartRviewHolder extends RecyclerView.ViewHolder {
 
     public ActivityChartRviewHolder(View itemView, int type) {
         super(itemView);
-        if (type == ComplexRecyclerViewAdapter.Bar_Chart) {
+        if (type == ComplexRecyclerViewAdapter.Distance_Bar_Chart) {
             chart = itemView.findViewById(R.id.barchart);
             charType = type;
-        } else if (type == ComplexRecyclerViewAdapter.Line_Char) {
+        } else if (type == ComplexRecyclerViewAdapter.Calorie_Bar_Chart) {
+            chart = itemView.findViewById(R.id.barchart);
+            charType = type;
+        }else if (type == ComplexRecyclerViewAdapter.Pace_Line_Char) {
             chart = itemView.findViewById(R.id.linechart);
             charType = type;
         }
