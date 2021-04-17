@@ -1,5 +1,6 @@
 package edu.neu.madcourse.wewell.ui.home;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,12 @@ import com.anychart.enums.Anchor;
 import com.anychart.enums.HoverMode;
 import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -68,7 +73,6 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         RecyclerView.ViewHolder viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         if (viewType == Bar_Chart) {
-
             View v1 = inflater.inflate(R.layout.activity_bar_chart_card, parent, false);
             viewHolder = new ActivityChartRviewHolder(v1, Bar_Chart);
         } else if (viewType == Line_Char) {
@@ -129,20 +133,34 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             idx++;
         }
 
-        BarDataSet barDataSet = new BarDataSet(barEntries, "Distance");
+        BarDataSet barDataSet = new BarDataSet(barEntries, "Distance (km)");
+        barDataSet.setValueTextSize(9);
+        barDataSet.setColor(Color.BLACK);
         ArrayList<String> theDates = new ArrayList<>();
         for (Activity activity : activityList) {
             String date = Util.formatDateV2(activity.getStartTime());
             theDates.add(date);
         }
-
+        barChart.getDescription().setText("");
         barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(theDates));
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        barChart.getXAxis().setDrawGridLines(false);
+//        barChart.setViewPortOffsets(5,10,5,0);
+        barChart.getAxisRight().setEnabled(false);
+        barChart.getAxisLeft().setEnabled(false);
+
+//        barChart.getLegend().setEnabled(false);
+
         BarData theData = new BarData(barDataSet);
+        theData.setBarWidth(0.5f);
         barChart.setData(theData);
         barChart.setTouchEnabled(true);
         barChart.setDragEnabled(true);
         barChart.setScaleEnabled(true);
-        barChart.setVisibleXRangeMaximum(6);
+        barChart.setVisibleXRangeMaximum(7);
+        barChart.animateY(1000);
     }
 
     private void initLineCharts(LineChart lineChart, List<Activity> activityList) {
