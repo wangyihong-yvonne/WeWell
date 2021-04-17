@@ -1,5 +1,8 @@
 package edu.neu.madcourse.wewell.util;
 
+import android.icu.util.Calendar;
+import java.text.DateFormat;
+
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,9 +17,17 @@ public class Util {
     }
 
     public static String formatDate(long date) {
+        Calendar smsTime = Calendar.getInstance();
+        smsTime.setTimeInMillis(date);
+        Calendar now = Calendar.getInstance();
         Date d = new Date(date);
-        Format format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Format format = new SimpleDateFormat("MMMM dd");
         String formattedDate = format.format(d);
+        if (now.get(Calendar.DATE) == smsTime.get(Calendar.DATE) ) {
+            return "Today, " + formattedDate;
+        } else if (now.get(Calendar.DATE) - smsTime.get(Calendar.DATE) == 1  ){
+            return "Yesterday, " + formattedDate;
+        }
         return formattedDate;
     }
 
@@ -26,8 +37,4 @@ public class Util {
         String formattedDate = format.format(d);
         return formattedDate;
     }
-
-
-
-
 }

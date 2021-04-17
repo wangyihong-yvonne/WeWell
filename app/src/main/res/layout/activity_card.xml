@@ -19,7 +19,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="79dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingBottom="5dp">
 
@@ -30,7 +30,7 @@
 
             <TextView
                 android:id="@+id/start_time_val"
-                android:layout_width="311dp"
+                android:layout_width="292dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/distance"
                 android:layout_marginLeft="16dp"

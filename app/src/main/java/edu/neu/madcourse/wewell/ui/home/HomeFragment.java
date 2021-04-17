@@ -30,6 +30,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import edu.neu.madcourse.wewell.R;
@@ -120,6 +121,7 @@ public class HomeFragment extends Fragment {
                     horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Calorie_Bar_Chart, activityList));
                     horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Pace_Line_Char, activityList));
 
+                    Collections.reverse(activityList);
                     if (shouldCreateRecycler) {
                         createRecyclerVertical(activityList);
                         createRecyclerHorizontal(horizontalItemList);
