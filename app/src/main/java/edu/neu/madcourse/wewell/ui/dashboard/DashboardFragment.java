@@ -150,7 +150,6 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         textDistance = (TextView) root.findViewById(R.id.data_distance);
         textPace = (TextView) root.findViewById(R.id.data_pace);
         textCalories = (TextView) root.findViewById(R.id.data_calories);
-        textViewcongrats = (TextView) root.findViewById(R.id.congrats);
         sublayout=(LinearLayout)root.findViewById(R.id.sub);
         mainlayout = (LinearLayout)root.findViewById(R.id.main);
 
@@ -233,11 +232,10 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 btRun.setEnabled(true);
                 btPause.setEnabled(false);
                 btStop.setEnabled(false);
-                textViewcongrats.setVisibility(View.VISIBLE);
-                textViewcongrats.setText("Congratulations!You've made it. Here's a summary of your runs.");
-                btRun.setVisibility(View.GONE);
-                btPause.setVisibility(View.GONE);
-                btStop.setVisibility(View.GONE);
+//                textViewcongrats.setVisibility(View.VISIBLE);
+//                btRun.setVisibility(View.GONE);
+//                btPause.setVisibility(View.GONE);
+//                btStop.setVisibility(View.GONE);
 //                sublayout.setVisibility(View.GONE);
 //                mainlayout.setVisibility(View.VISIBLE);
                 previousLocation = null;

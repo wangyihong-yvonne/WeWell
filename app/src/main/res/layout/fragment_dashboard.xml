@@ -36,30 +36,6 @@
 <!--    </LinearLayout>-->
 
 
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/congrats"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:visibility="gone"
-            android:gravity="center"
-            android:text=" "
-            android:layout_marginBottom="10dp"
-            android:textSize="20dp" />
-
-
-
-    </LinearLayout>
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
