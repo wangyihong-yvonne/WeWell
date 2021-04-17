@@ -13,14 +13,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import edu.neu.madcourse.wewell.ui.dashboard.DashboardFragment;
 import edu.neu.madcourse.wewell.ui.home.HomeFragment;
-import edu.neu.madcourse.wewell.ui.rewards.MainFragment;
+import edu.neu.madcourse.wewell.ui.rewards.RewardsFragment;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
     final Fragment homeFragment = new HomeFragment();
     final Fragment dashboardFragment = new DashboardFragment();
-    final Fragment rewardsFragment = new MainFragment();
+    final Fragment rewardsFragment = new RewardsFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = dashboardFragment;
 
