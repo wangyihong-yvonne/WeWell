@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -65,7 +66,7 @@ public class HomeFragment extends Fragment {
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String currentUserId = sharedPreferences.getString(getString(R.string.current_user_id), null);
 
-        Button signOutButton = (Button) root.findViewById(R.id.sign_out_button);
+        ImageView signOutButton = (ImageView) root.findViewById(R.id.sign_out_button);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,9 +75,8 @@ public class HomeFragment extends Fragment {
         });
 
         //new
-        TextView textView = (TextView) root.findViewById(R.id.textView);
-        String username = currentUserId;
-        textView.setText(username);
+//        String username = currentUserId;
+//        textView.setText(username);
 
         init(true, false, currentUserId);
 
