@@ -26,8 +26,8 @@ public class MainFragment extends Fragment {
         tabLayout = root.findViewById(R.id.tab_layout);
         pager2 = root.findViewById(R.id.view_pager2);
 
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        //FragmentManager fm = getFragmentManager();
+        //FragmentManager fm = getActivity().getSupportFragmentManager();
+        FragmentManager fm = getChildFragmentManager();
         adapter = new FragmentAdapter(fm, getLifecycle());
         pager2.setAdapter(adapter);
 
