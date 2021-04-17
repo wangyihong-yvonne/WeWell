@@ -22,7 +22,7 @@ public class Util {
 
     public static String formatDateV2(long date) {
         Date d = new Date(date);
-        Format format = new SimpleDateFormat("MM-dd HH:mm");
+        Format format = new SimpleDateFormat("MM-dd");
         String formattedDate = format.format(d);
         return formattedDate;
     }

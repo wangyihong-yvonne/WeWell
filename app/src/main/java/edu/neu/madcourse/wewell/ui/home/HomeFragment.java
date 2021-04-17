@@ -160,31 +160,5 @@ public class HomeFragment extends Fragment {
         ScrollingPagerIndicator recyclerIndicator = getView().findViewById(R.id.indicator);
         recyclerIndicator.attachToRecyclerView(recyclerViewHorizontal);
 
-//        BarChart barChart = (BarChart) getView().findViewById(R.id.barchart);
-//
-//        ArrayList<BarEntry> barEntries = new ArrayList<>();
-//        barEntries.add(new BarEntry(0f, 44f));
-//        barEntries.add(new BarEntry(1f, 88f));
-//        barEntries.add(new BarEntry(2f, 41f));
-//        barEntries.add(new BarEntry(3f, 85f));
-//        barEntries.add(new BarEntry(4f, 96f));
-//        barEntries.add(new BarEntry(5f, 25f));
-//        barEntries.add(new BarEntry(6f, 10f));
-//        BarDataSet barDataSet = new BarDataSet(barEntries, "Dates");
-//        ArrayList<String> theDates = new ArrayList<>();
-//        theDates.add("Mars");
-//        theDates.add("Avril");
-//        theDates.add("Dec");
-//        theDates.add("May");
-//        theDates.add("OCt");
-//        theDates.add("Nov");
-//        theDates.add("Fir");
-//        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(theDates));
-//        BarData theData = new BarData(barDataSet);//----Line of error
-//        barChart.setData(theData);
-//        barChart.setTouchEnabled(true);
-//        barChart.setDragEnabled(true);
-//        barChart.setScaleEnabled(true);
-//        barChart.setVisibleXRangeMaximum(4);
     }
 }
