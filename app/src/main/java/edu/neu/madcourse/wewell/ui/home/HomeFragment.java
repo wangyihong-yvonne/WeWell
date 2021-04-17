@@ -89,17 +89,23 @@ public class HomeFragment extends Fragment {
             @Override
             public void callBack(List<Activity> activityList) {
                 if (activityList != null) {
+
                     int totalRun = activityList.size();
                     int totalCalorie = 0;
                     double totalDistance = 0;
                     long totalPace = 0;
+                    int avgCalorie = 0;
+                    long avgPace = 0;
                     for (Activity activity : activityList) {
                         totalCalorie += activity.getCalories();
                         totalDistance += activity.getDistance();
                         totalPace += activity.getPace();
                     }
-                    int avgCalorie = totalCalorie / totalRun;
-                    long avgPace = totalPace / totalRun;
+                    if (activityList.size() != 0) {
+                         avgCalorie = totalCalorie / totalRun;
+                         avgPace = totalPace / totalRun;
+                    }
+
 
                     String formattedAvgPace = Util.formatTime(avgPace);
                     String formattedAvgCalorie = String.valueOf(avgCalorie);
@@ -112,6 +118,7 @@ public class HomeFragment extends Fragment {
                     horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Summary, activitySummary));
                     horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Distance_Bar_Chart, activityList));
                     horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Calorie_Bar_Chart, activityList));
+                    horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Pace_Line_Char, activityList));
 
                     if (shouldCreateRecycler) {
                         createRecyclerVertical(activityList);

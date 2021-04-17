@@ -28,7 +28,12 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,7 +137,55 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     private void initPaceLineChart(LineChart lineChart, List<Activity> activityList) {
+        List<Entry> lineEntries = new ArrayList<>();
+        float idx = 0;
+        for (Activity activity : activityList) {
+            long pace = activity.getPace();
+            lineEntries.add(new Entry(idx, (float) pace));
+            idx++;
+        }
+        LineDataSet lineDataSet = new LineDataSet(lineEntries, "Pace");
+        lineDataSet.setValueTextSize(11);
+        lineDataSet.setColor(Color.BLACK);
+        lineDataSet.setFillColor(Color.BLACK);
+        lineDataSet.setCircleColor(Color.BLACK);
+        lineDataSet.setCircleHoleColor(Color.BLACK);
+        lineDataSet.setValueFormatter(new MyValueFormatter());
+        ArrayList<String> theDates = new ArrayList<>();
+        for (Activity activity : activityList) {
+            String date = Util.formatDateV2(activity.getStartTime());
+            theDates.add(date);
+        }
+//        lineChart.getXAxis().setValueFormatter(new MyValueFormatter());
+        lineChart.getDescription().setText("");
+        lineChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(theDates));
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        lineChart.getXAxis().setDrawGridLines(false);
+//        lineChart.setViewPortOffsets(-5,-5,-5,-5);
 
+        lineChart.getAxisRight().setEnabled(false);
+        lineChart.getAxisLeft().setEnabled(false);
+//        barChart.getLegend().setEnabled(false);
+        LineData theData = new LineData(lineDataSet);
+        lineChart.setData(theData);
+        lineChart.setTouchEnabled(true);
+        lineChart.setDragEnabled(true);
+        lineChart.setScaleEnabled(true);
+        lineChart.setVisibleXRangeMaximum(5);
+        lineChart.animateY(1000);
+
+    }
+    private class MyValueFormatter extends ValueFormatter {
+
+
+        public MyValueFormatter() {
+        }
+
+        @Override
+        public String getPointLabel(Entry entry) {
+            return Util.formatTime((long) entry.getY());
+        }
     }
 
 
