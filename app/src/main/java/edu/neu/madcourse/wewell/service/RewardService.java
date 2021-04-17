@@ -30,18 +30,28 @@ public class RewardService {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-
                         Map<String, Object> unfinishedReward = (Map<String, Object>) document.getData();
 
-                        double prevFinishedDistance = (double) unfinishedReward.get("finishedDistance");
+                        int type = ((Number)unfinishedReward.get("type")).intValue();
+                        double prevFinishedAmount = (double) unfinishedReward.get("finishedAmount");
                         double goal = (double) unfinishedReward.get("goal");
-                        double curSum = prevFinishedDistance + currentDistance;
-                        if (curSum >= goal) {
-                            unfinishedReward.put("finished", true);
-                            unfinishedReward.put("finishedDistance", goal);
+
+                        if (type == 0) {
+                            double curSum = prevFinishedAmount + currentDistance;
+                            if (curSum >= goal) {
+                                unfinishedReward.put("finished", true);
+                                unfinishedReward.put("finishedAmount", goal);
+                            } else {
+                                unfinishedReward.put("finishedAmount", curSum);
+                            }
                         } else {
-                            unfinishedReward.put("finishedDistance", curSum);
+                            int calories = (int) ((currentDistance * 60));
+                            if (calories >= goal) {
+                                unfinishedReward.put("finished", true);
+                                unfinishedReward.put("finishedAmount", goal);
+                            }
                         }
+
                         db.collection("users").document(user.getUid()).collection("rewards")
                                 .document(document.getId()).set(unfinishedReward);
                     }
@@ -141,13 +151,15 @@ public class RewardService {
                     Map<String, Object> map = queryDocumentSnapshot.getData();
                     String title = (String) map.get("title");
                     double goal = ((Number) map.get("goal")).doubleValue();
-                    double finishedDistance = ((Number) map.get("finishedDistance")).doubleValue();
+                    double finishedAmount = ((Number) map.get("finishedAmount")).doubleValue();
+                    boolean finished = (boolean) map.get("finished");
                     int type = ((Number) map.get("type")).intValue();
                     Reward reward = new Reward();
                     reward.setTitle(title);
                     reward.setGoal(goal);
-                    reward.setFinishedDistance(finishedDistance);
+                    reward.setFinishedAmount(finishedAmount);
                     reward.setType(type);
+                    reward.setFinished(finished);
                     rewardList.add(reward);
                 });
                 callBack.callBack(rewardList);

@@ -31,11 +31,15 @@ public class UserService {
                     documentSnapshots.forEach(documentSnapshot -> {
                         Map<String, Object> defaultReward = documentSnapshot.getData();
                         Reward reward = new Reward();
-                        reward.setGoal(((Number) defaultReward.get("distance")).doubleValue());
-                        reward.setFinishedDistance(0);
+                        reward.setType(((Number) defaultReward.get("type")).intValue());
+                        if (reward.getType() == 0) {
+                            reward.setGoal(((Number) defaultReward.get("distance")).doubleValue());
+                        } else {
+                            reward.setGoal(((Number) defaultReward.get("calories")).doubleValue());
+                        }
+                        reward.setFinishedAmount(0);
                         reward.setTitle((String) defaultReward.get("title"));
                         reward.setFinished(false);
-                        reward.setType(0);
 
                         db.collection("users").document(uid).collection("rewards")
                                 .document(documentSnapshot.getId()).set(reward);

@@ -5,7 +5,7 @@ public class Reward {
     private int type;
     private long progress;
     private double goal;
-    private double finishedDistance;
+    private double finishedAmount;
     private boolean isFinished;
 
     public String getTitle() {
@@ -40,12 +40,12 @@ public class Reward {
         this.goal = goal;
     }
 
-    public double getFinishedDistance() {
-        return finishedDistance;
+    public double getFinishedAmount() {
+        return finishedAmount;
     }
 
-    public void setFinishedDistance(double finishedDistance) {
-        this.finishedDistance = finishedDistance;
+    public void setFinishedAmount(double finishedAmount) {
+        this.finishedAmount = finishedAmount;
     }
 
     public boolean isFinished() {
