@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -92,6 +93,9 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     private TextView textDistance = null;
     private TextView textPace = null;
     private TextView textCalories = null;
+    private TextView textViewcongrats = null;
+    private LinearLayout sublayout = null;
+    private LinearLayout mainlayout = null;
     private Timer mTimer = null;
     private TimerTask mTimerTask = null;
     private Handler mHandler = null;
@@ -146,6 +150,11 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
         textDistance = (TextView) root.findViewById(R.id.data_distance);
         textPace = (TextView) root.findViewById(R.id.data_pace);
         textCalories = (TextView) root.findViewById(R.id.data_calories);
+        textViewcongrats = (TextView) root.findViewById(R.id.congrats);
+        sublayout=(LinearLayout)root.findViewById(R.id.sub);
+        mainlayout = (LinearLayout)root.findViewById(R.id.main);
+
+
 
         btRun.setOnClickListener(listener);
         btPause.setOnClickListener(listener);
@@ -224,6 +233,13 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 btRun.setEnabled(true);
                 btPause.setEnabled(false);
                 btStop.setEnabled(false);
+                textViewcongrats.setVisibility(View.VISIBLE);
+                textViewcongrats.setText("Congratulations!You've made it. Here's a summary of your runs.");
+                btRun.setVisibility(View.GONE);
+                btPause.setVisibility(View.GONE);
+                btStop.setVisibility(View.GONE);
+//                sublayout.setVisibility(View.GONE);
+//                mainlayout.setVisibility(View.VISIBLE);
                 previousLocation = null;
                 lastKnownLocation = null;
                 Activity activity = new Activity(startTime, pace, totalDistance, timeCount, calories);
@@ -504,4 +520,6 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
             Log.e("Exception: %s", e.getMessage());
         }
     }
+
+
 }
