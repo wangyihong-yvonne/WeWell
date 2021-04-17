@@ -82,7 +82,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="170dp"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -92,7 +93,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/user_activity_list_recycler"
             android:layout_width="match_parent"
-            android:layout_height="529dp"
+            android:layout_height="428dp"
             android:layout_marginTop="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
