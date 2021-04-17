@@ -37,9 +37,9 @@ public class RviewAdapter extends RecyclerView.Adapter<RviewHolder> {
     @Override
     public void onBindViewHolder(RviewHolder holder, int position) {
         Activity currentActivity = activityList.get(position);
-        holder.distance_value.setText(currentActivity.getDistance() + " KM");
-        holder.calorie_value.setText(String.valueOf(currentActivity.getCalories()));
-        holder.pace_value.setText(Util.formatTime(currentActivity.getPace()));
+        holder.distance_value.setText(currentActivity.getDistance() + " Km");
+        holder.calorie_value.setText(String.valueOf(currentActivity.getCalories())+"Cals");
+        holder.pace_value.setText(Util.formatTime(currentActivity.getPace())+"/Km");
         holder.start_time_value.setText(Util.formatDate((currentActivity.getStartTime())));
         holder.time_value.setText(Util.formatTime(currentActivity.getRunningTime()));
 
