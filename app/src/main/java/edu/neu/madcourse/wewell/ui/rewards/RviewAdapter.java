@@ -17,7 +17,8 @@ import edu.neu.madcourse.wewell.model.Reward;
 public class RviewAdapter extends RecyclerView.Adapter<RviewHolder> {
     public List<Reward> rewardList;
     private ItemClickListener listener;
-    int[] images ={R.drawable.ic_badge1, R.drawable.ic_badge2, R.drawable.ic_badge3, R.drawable.ic_badge4, R.drawable.ic_badge5, R.drawable.ic_badge6, R.drawable.ic_burn, R.drawable.ic_calories};
+
+    int[] images ={R.drawable.ic_badge1, R.drawable.ic_badge2, R.drawable.ic_badge3, R.drawable.ic_badge4, R.drawable.ic_badge5, R.drawable.ic_badge6, R.drawable.ic_burn, R.drawable.ic_calories, R.drawable.ic_check};
 
     public RviewAdapter(List<Reward> rewardList) {
         this.rewardList = rewardList;
@@ -46,6 +47,7 @@ public class RviewAdapter extends RecyclerView.Adapter<RviewHolder> {
 //        }
         int progress = (int)(currentReward.getFinishedAmount() * 100 / currentReward.getGoal());
         holder.progressBar.setProgress(progress);
+
 
         if (currentReward.getTitle().equals( "First run!")){
             holder.imageView.setImageResource(images[0]);

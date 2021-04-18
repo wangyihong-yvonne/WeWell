@@ -28,6 +28,7 @@ public class SecondFragment extends Fragment {
     private ImageView imgView;
     private ImageView imgView1;
     private ImageView imgView2;
+
     int[] images ={R.drawable.onekk, R.drawable.twokk, R.drawable.threekk};
 
     public SecondFragment() {
