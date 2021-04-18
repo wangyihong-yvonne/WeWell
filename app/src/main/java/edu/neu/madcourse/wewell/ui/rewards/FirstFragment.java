@@ -43,10 +43,12 @@ public class FirstFragment extends Fragment {
 
         String currentUserId = sharedPreferences.getString(getString(R.string.current_user_id), null);
         rewardService = new RewardService();
-        init(true, false, currentUserId);
+
         TextViewR1 = root.findViewById(R.id.textViewR1);
         TextViewR2 = root.findViewById(R.id.textViewR2);
         TextViewR3 = root.findViewById(R.id.textViewR3);
+
+        init(true, false, currentUserId);
         return root;
     }
 
@@ -56,12 +58,15 @@ public class FirstFragment extends Fragment {
                 int size = leaderList.size();
                 if (size > 0) {
                     TextViewR1.setText(leaderList.get(0).getName());
+                    TextViewR1.setBackgroundResource(R.drawable.ic_group_35);
                 }
                 if (size > 1) {
                     TextViewR2.setText(leaderList.get(1).getName());
+                    TextViewR2.setBackgroundResource(R.drawable.ic_group_38);
                 }
                 if (size > 2) {
                     TextViewR3.setText(leaderList.get(2).getName());
+                    TextViewR3.setBackgroundResource(R.drawable.ic_group_37);
                 }
                 if (shouldCreateRecycler) {
                     if (leaderList.size() > 3) {
