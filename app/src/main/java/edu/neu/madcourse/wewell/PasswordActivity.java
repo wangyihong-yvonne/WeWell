@@ -30,7 +30,6 @@ public class PasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_password);
         userEmail = findViewById(R.id.etUserEmail);
         userPass = findViewById(R.id.btnForgotPass);
-        userBack = findViewById(R.id.buttonGoback);
         firebaseAuth = FirebaseAuth.getInstance();
 
         userPass.setOnClickListener(new View.OnClickListener() {

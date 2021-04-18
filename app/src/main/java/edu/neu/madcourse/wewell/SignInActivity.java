@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,15 +50,15 @@ public class SignInActivity extends AppCompatActivity {
             finish();
         }
 
-        Button googleButton = (Button) findViewById(R.id.sign_in_with_google);
+        ImageView googleButton = (ImageView) findViewById(R.id.sign_in_with_google);
         googleButton.setOnClickListener(v -> onGoogleSignIn());
 
         Button emailButton = (Button) findViewById(R.id.sign_in_with_email);
         emailButton.setOnClickListener(v -> onEmailSignIn());
 
-        TextView signInTextView = (TextView) findViewById(R.id.sign_in_has_account);
-        signInTextView.setOnClickListener(v -> {
-            startActivity(new Intent(SignInActivity.this, LoginActivity.class));
+        Button signupButton = (Button) findViewById(R.id.sign_up);
+        signupButton.setOnClickListener(v -> {
+            startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
         });
 
         userService = new UserService();
