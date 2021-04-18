@@ -25,4 +25,5 @@
     <string name="email">📧Email</string>
     <string name="login_in" translatable="false"><u>Log In</u></string>
     <string name="sign_up_optional">Don\'t have an account? <u>Sign Up</u></string>
+    <string name="log_in_optional">Remember password? <u>Log in</u></string>
 </resources>

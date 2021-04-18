@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     TextView forgotPass;
     TextView back;
     ImageView btnBackArrow2;
-    TextView btnBack2;
 
     FirebaseAuth firebaseAuth;
 
@@ -46,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
         back = findViewById(R.id.textviewsu);
         firebaseAuth = FirebaseAuth.getInstance();
         btnBackArrow2 = findViewById(R.id.btnBackArrow2);
-        btnBack2 = findViewById(R.id.btnBack2);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
