@@ -8,14 +8,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/leaderboard_recycler"
-        android:layout_width="412dp"
-        android:layout_height="370dp"
+        android:layout_width="409dp"
+        android:layout_height="277dp"
         android:paddingHorizontal="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.997" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textViewR1"
@@ -56,7 +56,7 @@
         app:layout_constraintHorizontal_bias="0.539"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.468"
+        app:layout_constraintVertical_bias="0.906"
         app:srcCompat="@drawable/ic_group_35" />
 
     <ImageView
@@ -65,10 +65,10 @@
         android:layout_height="113dp"
         app:layout_constraintBottom_toTopOf="@+id/leaderboard_recycler"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.003"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.668"
+        app:layout_constraintVertical_bias="0.924"
         app:srcCompat="@drawable/ic_group_38" />
 
     <ImageView
@@ -80,7 +80,7 @@
         app:layout_constraintHorizontal_bias="0.996"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.668"
+        app:layout_constraintVertical_bias="0.924"
         app:srcCompat="@drawable/ic_group_37" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

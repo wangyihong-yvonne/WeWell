@@ -43,27 +43,27 @@ public class SecondFragment extends Fragment {
                     getString(R.string.preference_file_key), Context.MODE_PRIVATE);
             String currentUserId = sharedPreferences.getString(getString(R.string.current_user_id), null);
 
-            imgView=root.findViewById(R.id.imageView5);
-            imgView1=root.findViewById(R.id.imageView8);
-            imgView2=root.findViewById(R.id.imageView9);
+//            imgView=root.findViewById(R.id.imageView5);
+//            imgView1=root.findViewById(R.id.imageView8);
+//            imgView2=root.findViewById(R.id.imageView9);
             rewardService = new RewardService();
             init(true, false, currentUserId);
             return root;
         }
     private void init(boolean shouldCreateRecycler, boolean shouldNotifyDataChange, String currentUserId) {
-        rewardService.getTotalDistanceByUser(distance -> {
-            String formatDistance = String.format("%.2f", distance);
-            Double TotalD = Double.valueOf(formatDistance);
-            if (TotalD >= 1){
-                imgView.setImageResource(images[0]);
-            }
-            if (TotalD >= 2){
-                imgView1.setImageResource(images[1]);
-            }
-            if (TotalD >= 3){
-                imgView2.setImageResource(images[2]);
-           }
-        }, currentUserId);
+//        rewardService.getTotalDistanceByUser(distance -> {
+//            String formatDistance = String.format("%.2f", distance);
+//            Double TotalD = Double.valueOf(formatDistance);
+//            if (TotalD >= 1){
+//                imgView.setImageResource(images[0]);
+//            }
+//            if (TotalD >= 2){
+//                imgView1.setImageResource(images[1]);
+//            }
+//            if (TotalD >= 3){
+//                imgView2.setImageResource(images[2]);
+//           }
+//        }, currentUserId);
         rewardService.getRewardsByUser(rewardList -> {
             if (rewardList != null) {
                 if (shouldCreateRecycler) {

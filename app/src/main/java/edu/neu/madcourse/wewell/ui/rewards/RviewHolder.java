@@ -1,6 +1,7 @@
 package edu.neu.madcourse.wewell.ui.rewards;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -17,13 +18,15 @@ public class RviewHolder extends RecyclerView.ViewHolder {
     public TextView title;
     public TextView description;
     public ProgressBar progressBar;
+    public ImageView imageView;
 
     public RviewHolder(View itemView, final ItemClickListener listener) {
         super(itemView);
         cardView = itemView.findViewById(R.id.reward_material_card);
         title = itemView.findViewById(R.id.reward_title);
-        description = itemView.findViewById(R.id.reward_description);
+       // description = itemView.findViewById(R.id.reward_description);
         progressBar = itemView.findViewById(R.id.reward_progress_bar);
+        imageView = itemView.findViewById(R.id.imageView10);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
