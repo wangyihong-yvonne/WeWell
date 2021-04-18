@@ -20,20 +20,21 @@
           android:id="@+id/btnBackArrow2"
           android:layout_width="23dp"
           android:layout_height="20dp"
+          android:layout_marginBottom="45dp"
           android:onClick="onBackButton2"
           app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
 
-      <TextView
-          android:id="@+id/btnBack2"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="100dp"
-          android:onClick="onBackButton2"
-          android:text="Back"
-          android:textAlignment="center"
-          android:textColor="@color/black"
-          android:textSize="15sp" />
+<!--      <TextView-->
+<!--          android:id="@+id/btnBack2"-->
+<!--          android:layout_width="wrap_content"-->
+<!--          android:layout_height="wrap_content"-->
+<!--          android:layout_marginBottom="45dp"-->
+<!--          android:onClick="onBackButton2"-->
+<!--          android:text="Back"-->
+<!--          android:textAlignment="center"-->
+<!--          android:textColor="@color/black"-->
+<!--          android:textSize="15sp" />-->
 
     </TableRow>
 
@@ -46,7 +47,7 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="28sp"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewl"
@@ -63,10 +64,11 @@
         android:id="@+id/Email2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginBottom="30dp"
         android:ems="10"
         android:drawableRight = "@drawable/ic_baseline_email_24"
-        android:hint="Email"
+        android:hint="Email Address"
 
         android:inputType="textEmailAddress" />
 
@@ -74,6 +76,7 @@
         android:id="@+id/Pass2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:ems="10"
         android:drawableRight = "@drawable/ic_baseline_lock_24"
         android:hint="Password"
@@ -84,6 +87,7 @@
         android:layout_height="wrap_content"
         android:gravity="right"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         android:text="Forgot password?"
         android:textStyle="bold"/>
 
@@ -93,7 +97,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="Login"
-        android:textColorHighlight="@color/black"
+        android:includeFontPadding="false"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
         android:backgroundTint="@color/black"
         android:textColorLink="@color/white" />
 

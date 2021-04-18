@@ -29,7 +29,6 @@ public class SignUpActivity extends AppCompatActivity {
     Button signup;
     TextView login;
     ImageView btnBackArrow;
-    TextView btnBack;
 
     FirebaseAuth firebaseAuth;
     UserService userService;
@@ -44,7 +43,6 @@ public class SignUpActivity extends AppCompatActivity {
         signup = findViewById(R.id.btnSignup);
         login = findViewById(R.id.btnLogin);
         btnBackArrow = findViewById(R.id.btnBackArrow);
-        btnBack = findViewById(R.id.btnBack);
         firebaseAuth = FirebaseAuth.getInstance();
         userService = new UserService();
         signup.setOnClickListener(new OnClickListener() {

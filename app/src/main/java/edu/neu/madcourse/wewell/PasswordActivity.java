@@ -19,8 +19,9 @@ import com.google.firebase.auth.FirebaseAuth;
 public class PasswordActivity extends AppCompatActivity {
     EditText userEmail;
     Button userPass;
-    TextView userBack;
+//    TextView userBack;
     FirebaseAuth firebaseAuth;
+    TextView loginOptional;
 
 
     @Override
@@ -31,6 +32,7 @@ public class PasswordActivity extends AppCompatActivity {
         userEmail = findViewById(R.id.etUserEmail);
         userPass = findViewById(R.id.btnForgotPass);
         firebaseAuth = FirebaseAuth.getInstance();
+        loginOptional = findViewById(R.id.textviewlo);
 
         userPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,9 +57,15 @@ public class PasswordActivity extends AppCompatActivity {
             }
         });
 
-        userBack.setOnClickListener(new View.OnClickListener() {
+//        userBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(PasswordActivity.this, LoginActivity.class));
+//            }
+//        });
+        loginOptional.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 startActivity(new Intent(PasswordActivity.this, LoginActivity.class));
             }
         });
