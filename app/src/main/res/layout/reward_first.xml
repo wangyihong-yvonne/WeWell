@@ -14,8 +14,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView17"
+        app:layout_constraintVertical_bias="0.14999998" />
 
     <TextView
         android:id="@+id/textViewR1"
@@ -51,36 +51,36 @@
         android:id="@+id/imageView17"
         android:layout_width="185dp"
         android:layout_height="172dp"
-        app:layout_constraintBottom_toTopOf="@+id/leaderboard_recycler"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.539"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.906"
+        app:layout_constraintVertical_bias="0.050000012"
         app:srcCompat="@drawable/ic_group_35" />
 
     <ImageView
         android:id="@+id/imageView19"
         android:layout_width="122dp"
         android:layout_height="113dp"
-        app:layout_constraintBottom_toTopOf="@+id/leaderboard_recycler"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.003"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.924"
+        app:layout_constraintVertical_bias="0.120000005"
         app:srcCompat="@drawable/ic_group_38" />
 
     <ImageView
         android:id="@+id/imageView20"
         android:layout_width="103dp"
         android:layout_height="113dp"
-        app:layout_constraintBottom_toTopOf="@+id/leaderboard_recycler"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.996"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.924"
+        app:layout_constraintVertical_bias="0.120000005"
         app:srcCompat="@drawable/ic_group_37" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
