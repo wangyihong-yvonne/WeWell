@@ -47,7 +47,7 @@ public class RviewAdapter extends RecyclerView.Adapter<RviewHolder> {
 //        }
         int progress = (int)(currentReward.getFinishedAmount() * 100 / currentReward.getGoal());
         holder.progressBar.setProgress(progress);
-       
+
 
         if (currentReward.getTitle().equals( "First run!")){
             holder.imageView.setImageResource(images[0]);
