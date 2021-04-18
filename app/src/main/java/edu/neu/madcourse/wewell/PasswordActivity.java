@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class PasswordActivity extends AppCompatActivity {
     EditText userEmail;
     Button userPass;
-    TextView userBack;
+//    TextView userBack;
     FirebaseAuth firebaseAuth;
     TextView loginOptional;
 
@@ -57,12 +57,12 @@ public class PasswordActivity extends AppCompatActivity {
             }
         });
 
-        userBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(PasswordActivity.this, LoginActivity.class));
-            }
-        });
+//        userBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(PasswordActivity.this, LoginActivity.class));
+//            }
+//        });
         loginOptional.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
