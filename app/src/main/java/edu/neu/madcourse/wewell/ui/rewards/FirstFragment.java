@@ -44,17 +44,29 @@ public class FirstFragment extends Fragment {
         String currentUserId = sharedPreferences.getString(getString(R.string.current_user_id), null);
         rewardService = new RewardService();
         init(true, false, currentUserId);
-//        TextViewR1.setText(leaderboard[0]);
-//        TextViewR2.setText();
-//        TextViewR3.setText();
+        TextViewR1 = root.findViewById(R.id.textViewR1);
+        TextViewR2 = root.findViewById(R.id.textViewR2);
+        TextViewR3 = root.findViewById(R.id.textViewR3);
         return root;
     }
 
     private void init(boolean shouldCreateRecycler, boolean shouldNotifyDataChange, String currentUserId) {
         rewardService.getLeaderboard(leaderList -> {
             if (leaderList != null) {
+                int size = leaderList.size();
+                if (size > 0) {
+                    TextViewR1.setText(leaderList.get(0).getName());
+                }
+                if (size > 1) {
+                    TextViewR2.setText(leaderList.get(1).getName());
+                }
+                if (size > 2) {
+                    TextViewR3.setText(leaderList.get(2).getName());
+                }
                 if (shouldCreateRecycler) {
-                    createRecycler(leaderList);
+                    if (leaderList.size() > 3) {
+                        createRecycler(leaderList.subList(3, size));
+                    }
                 }
                 if (shouldNotifyDataChange) {
                     leaderboardRviewAdapter.notifyDataSetChanged();
@@ -62,6 +74,7 @@ public class FirstFragment extends Fragment {
             }
         });
     }
+
     private void createRecycler (List<Leader> leaderList) {
         if (leaderList != null) {
             leaderboardRLayoutManger = new LinearLayoutManager(getContext());
