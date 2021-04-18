@@ -17,7 +17,8 @@ import edu.neu.madcourse.wewell.model.Reward;
 public class RviewAdapter extends RecyclerView.Adapter<RviewHolder> {
     public List<Reward> rewardList;
     private ItemClickListener listener;
-    int[] images ={R.drawable.ic_badge1, R.drawable.ic_badge2, R.drawable.ic_badge3, R.drawable.ic_badge4, R.drawable.ic_badge5, R.drawable.ic_badge6, R.drawable.ic_burn, R.drawable.ic_calories};
+
+    int[] images ={R.drawable.ic_badge1, R.drawable.ic_badge2, R.drawable.ic_badge3, R.drawable.ic_badge4, R.drawable.ic_badge5, R.drawable.ic_badge6, R.drawable.ic_burn, R.drawable.ic_calories, R.drawable.ic_check};
 
     public RviewAdapter(List<Reward> rewardList) {
         this.rewardList = rewardList;
@@ -46,53 +47,70 @@ public class RviewAdapter extends RecyclerView.Adapter<RviewHolder> {
 //        }
         int progress = (int)(currentReward.getFinishedAmount() * 100 / currentReward.getGoal());
         holder.progressBar.setProgress(progress);
+       
 
         if (currentReward.getTitle().equals( "First run!")){
             holder.imageView.setImageResource(images[0]);
+           holder.imageView5.setVisibility(View.VISIBLE);
             if(left > 0){
                 setBW(holder.imageView);
+                holder.imageView5.setVisibility(View.INVISIBLE);
             }
         }
         if (currentReward.getTitle().equals("1KM Milestone")){
             holder.imageView.setImageResource(images[1]);
+            holder.imageView5.setVisibility(View.VISIBLE);
             if(left > 0){
                 setBW(holder.imageView);
+                holder.imageView5.setVisibility(View.INVISIBLE);
             }
         }
         if (currentReward.getTitle().equals("10KM Milestone")){
             holder.imageView.setImageResource(images[2]);
+            holder.imageView5.setVisibility(View.VISIBLE);
             if(left > 0){
                 setBW(holder.imageView);
+                holder.imageView5.setVisibility(View.INVISIBLE);
             }
         }
         if (currentReward.getTitle().equals("20KM Milestone")){
+            holder.imageView5.setVisibility(View.VISIBLE);
             holder.imageView.setImageResource(images[3]);
             if(left > 0){
                 setBW(holder.imageView);
+                holder.imageView5.setVisibility(View.INVISIBLE);
             }
         }
         if (currentReward.getTitle().equals("30KM Milestone")){
+            holder.imageView5.setVisibility(View.VISIBLE);
             holder.imageView.setImageResource(images[4]);
             if(left > 0){
                 setBW(holder.imageView);
+                holder.imageView5.setVisibility(View.INVISIBLE);
             }
         }
         if (currentReward.getTitle().equals("50KM Milestone")){
+            holder.imageView5.setVisibility(View.VISIBLE);
             holder.imageView.setImageResource(images[5]);
             if(left > 0){
                 setBW(holder.imageView);
+                holder.imageView5.setVisibility(View.INVISIBLE);
             }
         }
         if (currentReward.getTitle().equals("Consume 100cal in one run")){
+            holder.imageView5.setVisibility(View.VISIBLE);
             holder.imageView.setImageResource(images[6]);
             if(left > 0){
                 setBW(holder.imageView);
+                holder.imageView5.setVisibility(View.INVISIBLE);
             }
         }
         if (currentReward.getTitle().equals("Consume 200cal in one run")){
+            holder.imageView5.setVisibility(View.VISIBLE);
             holder.imageView.setImageResource(images[7]);
             if(left > 0){
                 setBW(holder.imageView);
+                holder.imageView5.setVisibility(View.INVISIBLE);
             }
         }
     }
