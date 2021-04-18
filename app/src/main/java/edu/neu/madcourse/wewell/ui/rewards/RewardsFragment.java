@@ -20,11 +20,14 @@ public class RewardsFragment extends Fragment {
     TabLayout tabLayout;
     ViewPager2 pager2;
     FragmentAdapter adapter;
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.reward_main, container, false);
         super.onCreate(savedInstanceState);
+
 
         tabLayout = root.findViewById(R.id.tab_layout);
         pager2 = root.findViewById(R.id.view_pager2);
