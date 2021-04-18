@@ -57,15 +57,15 @@ public class FirstFragment extends Fragment {
             if (leaderList != null) {
                 int size = leaderList.size();
                 if (size > 0) {
-                    TextViewR1.setText(leaderList.get(0).getName());
+                    TextViewR1.setText(leaderList.get(0).getFormatName());
                     TextViewR1.setBackgroundResource(R.drawable.ic_group_35);
                 }
                 if (size > 1) {
-                    TextViewR2.setText(leaderList.get(1).getName());
+                    TextViewR2.setText(leaderList.get(1).getFormatName());
                     TextViewR2.setBackgroundResource(R.drawable.ic_group_38);
                 }
                 if (size > 2) {
-                    TextViewR3.setText(leaderList.get(2).getName());
+                    TextViewR3.setText(leaderList.get(2).getFormatName());
                     TextViewR3.setBackgroundResource(R.drawable.ic_group_37);
                 }
                 if (shouldCreateRecycler) {
