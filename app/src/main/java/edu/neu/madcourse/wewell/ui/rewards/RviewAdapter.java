@@ -49,51 +49,24 @@ public class RviewAdapter extends RecyclerView.Adapter<RviewHolder> {
 
         if (currentReward.getTitle().equals( "First run!")){
             holder.imageView.setImageResource(images[0]);
-            if(left > 0){
-                setBW(holder.imageView);
-            }
-        }
-        if (currentReward.getTitle().equals("1KM Milestone")){
+        } else if (currentReward.getTitle().equals("1KM Milestone")){
             holder.imageView.setImageResource(images[1]);
-            if(left > 0){
-                setBW(holder.imageView);
-            }
-        }
-        if (currentReward.getTitle().equals("10KM Milestone")){
+        } else if (currentReward.getTitle().equals("10KM Milestone")){
             holder.imageView.setImageResource(images[2]);
-            if(left > 0){
-                setBW(holder.imageView);
-            }
-        }
-        if (currentReward.getTitle().equals("20KM Milestone")){
+        }else if (currentReward.getTitle().equals("20KM Milestone")){
             holder.imageView.setImageResource(images[3]);
-            if(left > 0){
-                setBW(holder.imageView);
-            }
-        }
-        if (currentReward.getTitle().equals("30KM Milestone")){
+        } else if (currentReward.getTitle().equals("30KM Milestone")){
             holder.imageView.setImageResource(images[4]);
-            if(left > 0){
-                setBW(holder.imageView);
-            }
-        }
-        if (currentReward.getTitle().equals("50KM Milestone")){
+        }else if (currentReward.getTitle().equals("50KM Milestone")){
             holder.imageView.setImageResource(images[5]);
-            if(left > 0){
-                setBW(holder.imageView);
-            }
-        }
-        if (currentReward.getTitle().equals("Consume 100cal in one run")){
+        }else if (currentReward.getTitle().equals("Consume 100cal in one run")){
             holder.imageView.setImageResource(images[6]);
-            if(left > 0){
-                setBW(holder.imageView);
-            }
-        }
-        if (currentReward.getTitle().equals("Consume 200cal in one run")){
+        }else if (currentReward.getTitle().equals("Consume 200cal in one run")){
             holder.imageView.setImageResource(images[7]);
-            if(left > 0){
-                setBW(holder.imageView);
-            }
+        }
+        if(left > 0){
+            setBW(holder.imageView);
+            holder.checkerView.setVisibility(View.INVISIBLE);
         }
     }
     private void setBW(ImageView iv){

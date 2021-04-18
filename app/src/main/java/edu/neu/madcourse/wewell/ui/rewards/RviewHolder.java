@@ -19,6 +19,7 @@ public class RviewHolder extends RecyclerView.ViewHolder {
     public TextView description;
     public ProgressBar progressBar;
     public ImageView imageView;
+    public ImageView checkerView;
 
     public RviewHolder(View itemView, final ItemClickListener listener) {
         super(itemView);
@@ -27,6 +28,7 @@ public class RviewHolder extends RecyclerView.ViewHolder {
        // description = itemView.findViewById(R.id.reward_description);
         progressBar = itemView.findViewById(R.id.reward_progress_bar);
         imageView = itemView.findViewById(R.id.imageView10);
+        checkerView = itemView.findViewById(R.id.imageView5);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
