@@ -18,6 +18,18 @@ public class Leader {
         return name;
     }
 
+    public String getFormatName() {
+        try {
+            if (name == null) return "";
+            String formatName = name.length() > 5 ? name.substring(0, name.length() - 3) : name;
+            formatName += "***";
+            return formatName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
     public void setName(String name) {
         this.name = name;
     }

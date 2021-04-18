@@ -28,8 +28,7 @@ public class LeaderboardRviewAdapter extends RecyclerView.Adapter<LeaderboardRvi
     @Override
     public void onBindViewHolder(LeaderboardRviewHolder holder, int position) {
         Leader leader = leaderboard.get(position);
-
-        holder.title.setText(String.valueOf(leader.getName()));
+        holder.title.setText(leader.getFormatName());
         String formatDistance = String.format("%.2f", leader.getDistance());
         holder.description.setText(formatDistance + " km");
         holder.ranking.setText(String.valueOf(leader.getRanking() + 1));
