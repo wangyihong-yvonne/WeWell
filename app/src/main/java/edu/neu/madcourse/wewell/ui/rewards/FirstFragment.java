@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +24,10 @@ public class FirstFragment extends Fragment {
     private LeaderboardRviewAdapter leaderboardRviewAdapter;
     private RecyclerView.LayoutManager leaderboardRLayoutManger;
     private RewardService rewardService;
+    TextView TextViewR1;
+    TextView TextViewR2;
+    TextView TextViewR3;
+    public List<Leader> leaderboard;
 
     public FirstFragment() {
         // Required empty public constructor
@@ -39,6 +44,9 @@ public class FirstFragment extends Fragment {
         String currentUserId = sharedPreferences.getString(getString(R.string.current_user_id), null);
         rewardService = new RewardService();
         init(true, false, currentUserId);
+//        TextViewR1.setText(leaderboard[0]);
+//        TextViewR2.setText();
+//        TextViewR3.setText();
         return root;
     }
 
