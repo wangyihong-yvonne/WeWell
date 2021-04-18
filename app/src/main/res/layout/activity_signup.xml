@@ -69,7 +69,7 @@
         android:drawableRight="@drawable/ic_baseline_email_24"
         android:ems="10"
 
-        android:hint="Email Address"
+        android:hint="Email Address (Need Verification)"
         android:inputType="textEmailAddress" />
 
     <EditText
