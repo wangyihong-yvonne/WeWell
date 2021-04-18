@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_we_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeWell">
-
+        <activity android:name=".EmailVerifyActivty"></activity>
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
@@ -23,7 +23,6 @@
         <activity
             android:name=".PasswordActivity"
             android:label="PasswordActivity" />
-
         <activity
             android:name=".SignInActivity"
             android:label="@string/title_activity_sign_in" />
@@ -32,18 +31,16 @@
             android:label="LoginActivity" />
         <activity
             android:name=".SignUpActivity"
-            android:label="SignUpActivity"
-        />
+            android:label="SignUpActivity" />
         <activity
             android:name=".WelcomeActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
