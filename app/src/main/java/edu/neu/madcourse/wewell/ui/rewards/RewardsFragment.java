@@ -1,9 +1,11 @@
 package edu.neu.madcourse.wewell.ui.rewards;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,6 +22,7 @@ public class RewardsFragment extends Fragment {
     TabLayout tabLayout;
     ViewPager2 pager2;
     FragmentAdapter adapter;
+    ImageButton ImageButton2;
 
 
     @Override
@@ -31,6 +34,7 @@ public class RewardsFragment extends Fragment {
 
         tabLayout = root.findViewById(R.id.tab_layout);
         pager2 = root.findViewById(R.id.view_pager2);
+        ImageButton2 = root.findViewById(R.id.imageButton2);
 
         //FragmentManager fm = getActivity().getSupportFragmentManager();
         FragmentManager fm = getChildFragmentManager();
@@ -63,6 +67,16 @@ public class RewardsFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 tabLayout.selectTab(tabLayout.getTabAt(position));
+            }
+        });
+        ImageButton2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, "Hey my friend,"+"\nWow! I have burnt a lot of calories💪🥳"+"\nCome to join me!"+" app download link"
+                );
+                intent.setType("text/plain");
+                startActivity(Intent.createChooser(intent,"Share to "));
             }
         });
         return root;
