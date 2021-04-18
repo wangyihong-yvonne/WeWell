@@ -63,12 +63,12 @@ public class SignUpActivity extends AppCompatActivity {
                                         firebaseAuth.getCurrentUser().sendEmailVerification()
                                                 .addOnCompleteListener(task1 -> {
                                                     if (task1.isSuccessful()) {
-                                                        Toast.makeText(SignUpActivity.this, "Welcome to WeWell. Please check your email for verification",
-                                                                Toast.LENGTH_LONG).show();
                                                         email.setText("");
                                                         password.setText("");
                                                         //create corresponding userId to Firestore
                                                         userService.saveUser(firebaseAuth.getCurrentUser().getUid());
+                                                        Intent intent = new Intent(SignUpActivity.this, EmailVerifyActivty.class);
+                                                        startActivity(intent);
                                                     } else {
                                                         Toast.makeText(SignUpActivity.this, task1.getException().getMessage(),
                                                                 Toast.LENGTH_LONG).show();
