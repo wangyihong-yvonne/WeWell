@@ -107,7 +107,7 @@ public class RewardService {
                                         String email = user.getEmail();
                                         if (!email.isEmpty()) {
                                             int end = email.indexOf('@');
-                                            username = email.substring(0, Math.min(end, 18));
+                                            username = email.substring(0, Math.min(end, 11));
                                         } else {
                                             username = "Unknown Runner";
                                         }
