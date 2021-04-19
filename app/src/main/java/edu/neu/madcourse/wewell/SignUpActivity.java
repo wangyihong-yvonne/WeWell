@@ -1,8 +1,11 @@
 package edu.neu.madcourse.wewell;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,7 +32,6 @@ public class SignUpActivity extends AppCompatActivity {
     Button signup;
     TextView login;
     ImageView btnBackArrow;
-
     FirebaseAuth firebaseAuth;
     UserService userService;
     @Override
@@ -46,12 +48,19 @@ public class SignUpActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         userService = new UserService();
         signup.setOnClickListener(new OnClickListener() {
+            public void ShowToast(Context context, String info) {
+                Toast toast = Toast.makeText(context, Html.fromHtml("<font color=black ><b>" + info + "</b></font>"), Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.show();
+            }
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) || TextUtils.isEmpty(confirmPassword.getText().toString())) {
-                    Toast.makeText(SignUpActivity.this, "Email Address or Password can't be empty.", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(SignUpActivity.this, "Email Address or Password can't be empty.", Toast.LENGTH_LONG).show();
+                    ShowToast(SignUpActivity.this, "Email Address or Password can't be empty.");
                 } else if(!password.getText().toString().equals(confirmPassword.getText().toString())) {
-                    Toast.makeText(SignUpActivity.this, "Passwords do not match.", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(SignUpActivity.this, "Passwords do not match.", Toast.LENGTH_LONG).show();
+                   ShowToast(SignUpActivity.this, "Passwords do not match.");
                 } else {
                     firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(),
                             password.getText().toString())
