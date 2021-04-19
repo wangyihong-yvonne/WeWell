@@ -17,8 +17,10 @@ Group Project for CS5520 Mobile Application Development
 4. User can see other users' ranking
 5. User can win badges by completing the challenges
 
-![Images]
-![Images]
+![Images](https://github.com/singinzrain/WeWell/blob/main/demo/login.png)
+![Images](https://github.com/singinzrain/WeWell/blob/main/demo/run.png)
+![Images](https://github.com/singinzrain/WeWell/blob/main/demo/history.png)
+![Images](https://github.com/singinzrain/WeWell/blob/main/demo/badge.png)
 
 ## Installation
 
