@@ -61,9 +61,9 @@ public class RviewAdapter extends RecyclerView.Adapter<RviewHolder> {
             holder.imageView.setImageResource(images[4]);
         }else if (currentReward.getTitle().equals("50KM Milestone")){
             holder.imageView.setImageResource(images[5]);
-        }else if (currentReward.getTitle().equals("Consume 100cal in one run")){
+        }else if (currentReward.getTitle().equals("Burn 100cal in one run")){
             holder.imageView.setImageResource(images[6]);
-        }else if (currentReward.getTitle().equals("Consume 200cal in one run")){
+        }else if (currentReward.getTitle().equals("Burn 200cal in one run")){
             holder.imageView.setImageResource(images[7]);
         }
         if(left > 0){
