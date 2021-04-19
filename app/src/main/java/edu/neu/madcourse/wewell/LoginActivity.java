@@ -3,9 +3,8 @@ package edu.neu.madcourse.wewell;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -48,10 +47,16 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         btnBackArrow2 = findViewById(R.id.btnBackArrow2);
         login.setOnClickListener(new View.OnClickListener() {
+            public void ShowToast(Context context, String info) {
+                Toast toast = Toast.makeText(context, Html.fromHtml("<font color=black ><b>" + info + "</b></font>"), Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.show();
+            }
             @Override
             public void onClick(View view) {
                 if (TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(pass.getText().toString())) {
-                    Toast.makeText(LoginActivity.this, "Email Address or Password can't be empty.", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(LoginActivity.this, "Email Address or Password can't be empty.", Toast.LENGTH_LONG).show();
+                     ShowToast(LoginActivity.this, "Email Address or Password can't be empty.");
                 } else {
                     firebaseAuth.signInWithEmailAndPassword(email.getText().toString(),
                             pass.getText().toString())
@@ -64,12 +69,14 @@ public class LoginActivity extends AppCompatActivity {
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                             startActivity(intent);
                                         } else {
-                                            Toast.makeText(LoginActivity.this, "Please verify your email address"
-                                                    , Toast.LENGTH_LONG).show();
+                                           // Toast.makeText(LoginActivity.this, "Please verify your email address"
+                                                   // , Toast.LENGTH_LONG).show();
+                                            ShowToast(LoginActivity.this, "Please verify your email address");
                                         }
                                     } else {
-                                        Toast.makeText(LoginActivity.this, task.getException().getMessage()
-                                                , Toast.LENGTH_LONG).show();
+//                                        Toast.makeText(LoginActivity.this, task.getException().getMessage()
+//                                                , Toast.LENGTH_LONG).show();
+                                        ShowToast(LoginActivity.this, task.getException().getMessage());
                                     }
                                 }
                             });
