@@ -1,8 +1,11 @@
 package edu.neu.madcourse.wewell;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,19 +37,28 @@ public class PasswordActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         loginOptional = findViewById(R.id.textviewlo);
 
+
+
         userPass.setOnClickListener(new View.OnClickListener() {
+            public void ShowToast(Context context, String info) {
+                Toast toast = Toast.makeText(context, Html.fromHtml("<font color=black ><b>" + info + "</b></font>"), Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.show();
+            }
             @Override
             public void onClick(View view) {
                 if (TextUtils.isEmpty(userEmail.getText().toString())) {
-                    Toast.makeText(PasswordActivity.this, "Email Address can't be empty.", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(PasswordActivity.this, "Email Address can't be empty.", Toast.LENGTH_LONG).show();
+                    ShowToast(PasswordActivity.this, "Email Address can't be empty.");
                 } else {
                     firebaseAuth.sendPasswordResetEmail(userEmail.getText().toString())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(PasswordActivity.this,
-                                                "Password send to your email", Toast.LENGTH_LONG).show();
+//                                        Toast.makeText(PasswordActivity.this,
+//                                                "Password send to your email", Toast.LENGTH_LONG).show();
+                                        ShowToast(PasswordActivity.this, "Check your email to reset password");
                                     } else {
                                         Toast.makeText(PasswordActivity.this,
                                                 task.getException().getMessage(), Toast.LENGTH_LONG).show();
