@@ -11,10 +11,11 @@ Group Project for CS5520 Mobile Application Development
 
 ## Usage
 
-1. Record runnning time, distance, pace and calories
-2. See their exercise history and analysis chart
-3. See other users' ranking
-4. Win badges by completing the challenges
+1. User can signup via email, login and reset password
+2. User can record runnning time, distance, pace and calories consumption
+3. User can see their exercise history and analysis chart
+4. User can see other users' ranking
+5. User can win badges by completing the challenges
 
 ![Images]
 ![Images]
