@@ -17,7 +17,8 @@
     app:cardCornerRadius="0dp"
     app:cardElevation="5dp"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent">
+    app:layout_constraintStart_toStartOf="parent"
+    app:rippleColor="@android:color/transparent">
 
     <LinearLayout
         android:layout_width="match_parent"
