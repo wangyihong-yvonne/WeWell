@@ -218,7 +218,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 if (isPause) {//pause
                     btPause.setText("Resume");
                     //stop drawing
-                    isDrawRoute = true;
+                    isDrawRoute = false;
                     previousLocation = null;
                     lastKnownLocation = null;
                     hasPaused = true;
