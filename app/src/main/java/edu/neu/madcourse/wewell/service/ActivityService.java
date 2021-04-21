@@ -75,7 +75,6 @@ public class ActivityService {
                         Activity activity = new Activity(startTime, pace, distance, runningTime, (int) calories);
                         activitiesList.add(activity);
                     }
-
                     callBack.callBack(activitiesList);
                 }
             }

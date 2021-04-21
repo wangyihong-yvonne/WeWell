@@ -106,6 +106,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
     private boolean isPause = false;
     private boolean isStop = true;
     private boolean isDrawRoute = false;
+    private boolean hasPaused = false;
     private static int delay = 1000; //1s
     private static int period = 1000; //1s
     private static double totalDistance = 0;
@@ -217,7 +218,11 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 if (isPause) {//pause
                     btPause.setText("Resume");
                     //stop drawing
-                    isDrawRoute = false;
+                    isDrawRoute = true;
+                    previousLocation = null;
+                    lastKnownLocation = null;
+                    hasPaused = true;
+
                 } else { //resume
                     btPause.setText("Pause");
                     isDrawRoute = true;
@@ -396,8 +401,12 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
             map.addMarker(new MarkerOptions().position(currentLocation).title("My start location"));
             map.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
         } else {
-            lastKnownLocation = location;
             previousLocation = locationHistory.get(locationHistory.size() - 1);
+            if (hasPaused) {
+                previousLocation = location;
+                hasPaused = false;
+            }
+            lastKnownLocation = location;
             double distance = lastKnownLocation.distanceTo(previousLocation);
 
             //add to the total distance 
