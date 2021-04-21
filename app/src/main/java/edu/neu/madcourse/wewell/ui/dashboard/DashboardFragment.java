@@ -257,6 +257,7 @@ public class DashboardFragment extends Fragment implements OnMapReadyCallback {
                 isDrawRoute = false;
                 totalDistance = 0;
 
+                locationHistory.clear();
             }
         }
     };
