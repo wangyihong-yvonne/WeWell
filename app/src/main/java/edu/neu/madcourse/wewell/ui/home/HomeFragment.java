@@ -121,7 +121,7 @@ public class HomeFragment extends Fragment {
                     horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Calorie_Bar_Chart, activityList));
                     horizontalItemList.add(new RecyclerItem(ComplexRecyclerViewAdapter.Pace_Line_Char, activityList));
 
-                    Collections.reverse(activityList);
+//                    Collections.reverse(activityList);
                     if (shouldCreateRecycler) {
                         createRecyclerVertical(activityList);
                         createRecyclerHorizontal(horizontalItemList);

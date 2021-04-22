@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class PasswordActivity extends AppCompatActivity {
     EditText userEmail;
     Button userPass;
-//    TextView userBack;
+    ImageView btnBackArrow;
     FirebaseAuth firebaseAuth;
     TextView loginOptional;
 
@@ -36,7 +37,7 @@ public class PasswordActivity extends AppCompatActivity {
         userPass = findViewById(R.id.btnForgotPass);
         firebaseAuth = FirebaseAuth.getInstance();
         loginOptional = findViewById(R.id.textviewlo);
-
+        btnBackArrow = findViewById(R.id.btnBackArrowPass);
 
 
         userPass.setOnClickListener(new View.OnClickListener() {
@@ -69,12 +70,12 @@ public class PasswordActivity extends AppCompatActivity {
             }
         });
 
-//        userBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(PasswordActivity.this, LoginActivity.class));
-//            }
-//        });
+        btnBackArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PasswordActivity.this, LoginActivity.class));
+            }
+        });
         loginOptional.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
