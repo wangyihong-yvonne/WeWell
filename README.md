@@ -35,7 +35,8 @@ Install the APK on an emulator or a connected device with the following command:
 
 ## Code Reference
 
-
+## Caveat
+You will need to add a SHA-1 fingerprint on Firebase in order to test Google Account Login in debug mode. 
 
 ## Code Style
 
