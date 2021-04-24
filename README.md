@@ -9,7 +9,7 @@ Group Project for CS5520 Mobile Application Development
 -   Yihong Wang ([@wangyihong-yvonne]&[@yihongwang001])
 -   Huixian Zhang ([@HuixianZhang])
 
-## Usage
+## Main Functions
 
 1. User can signup via email, login and reset password
 2. User can record runnning time, distance, pace and calories consumption
@@ -30,13 +30,11 @@ Install the APK on an emulator or a connected device with the following command:
 2. Open in Android Studio
 3. Build project
 
-## Main Functions
-
-
-## Code Reference
-
 ## Caveat
 You will need to add a SHA-1 fingerprint on Firebase in order to test Google Account Login in debug mode. 
+
+## Emulator Setting
+How to run app in emulator: https://drive.google.com/file/d/15LQbug5QJVOlRhA0wNl434puGKiJPJrd/view?usp=sharing
 
 ## Code Style
 
