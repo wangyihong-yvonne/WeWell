@@ -1,5 +1,5 @@
 # WeWell
-Group Project for CS5520 Mobile Application Development
+Group Project for Mobile Application Development
 
 ## Team members
 -   Yu Feng ([@singinzrain])
